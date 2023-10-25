@@ -7,46 +7,37 @@
             src="~assets/images/anycar_logo.png"
             alt=""
             @click="$router.push('/')"
-          >
+          />
         </div>
       </div>
       <div class="navbar_middle">
         <div class="menu_list">
           <NuxtLink to="/buy-car">
-            <p class="menu_item">
-              Buy Car
-            </p>
+            <p class="menu_item">Buy Car</p>
           </NuxtLink>
           <NuxtLink to="/sell-car">
-            <p class="menu_item">
-              Sell Car
-            </p>
+            <p class="menu_item">Sell Car</p>
           </NuxtLink>
           <NuxtLink to="/compare-cars">
-            <p class="menu_item">
-              Compare
-            </p>
+            <p class="menu_item">Compare</p>
           </NuxtLink>
           <NuxtLink to="#">
-            <p class="menu_item">
-              Verify a Car
-            </p>
+            <p class="menu_item">Verify a Car</p>
           </NuxtLink>
           <NuxtLink to="#">
-            <p class="menu_item">
-              Solutions
-            </p>
+            <p class="menu_item">Solutions</p>
           </NuxtLink>
         </div>
       </div>
       <div class="navbar_rhs">
         <div class="account_btn">
-          <button class="global_btn">
-            My Account
-          </button>
+          <button class="global_btn">My Account</button>
         </div>
         <div class="mobile_menu">
-          <span class="material-icons-outlined" @click="$emit('showMobileMenu')">
+          <span
+            class="material-icons-outlined"
+            @click="$emit('showMobileMenu')"
+          >
             menu
           </span>
         </div>
@@ -55,33 +46,27 @@
   </div>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      productList: {},
-      isSticky: false
-    }
-  },
-  mounted () {
-    window.addEventListener('scroll', this.makeHeaderSticky)
-  },
-  beforeDestroy () {
-    window.removeEventListener('scroll', this.makeHeaderSticky)
-  },
-  methods: {
-    makeHeaderSticky () {
-      if (window.scrollY > 0) {
-        this.isSticky = true
-      } else {
-        this.isSticky = false
-      }
-    }
+<script setup>
+const isSticky = ref(false);
+const productList = ref({});
+
+onMounted(() => {
+  console.log("the component is created");
+  window.addEventListener("scroll", this.makeHeaderSticky);
+});
+onBeforeUnmount(() => {
+  console.log("the component is destroyed");
+  window.removeEventListener("scroll", this.makeHeaderSticky);
+});
+
+const makeHeaderSticky = () => {
+  if (window.scrollY > 0) {
+    isSticky.value = true;
+  } else {
+    isSticky.value = false;
   }
-  // created () {
-  //   this.productList = this.$store.state.cartList
-  // }
-}
+  console.log(isSticky.value);
+};
 </script>
 
 <style scoped>
@@ -238,5 +223,4 @@ export default {
     display: none;
   }
 }
-
 </style>
