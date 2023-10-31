@@ -12,21 +12,21 @@
       </div>
       <div class="navbar_middle">
         <div class="menu_list">
-          <NuxtLink to="/buy-car">
+          <nuxt-link to="/buy-car">
             <p class="menu_item">Buy Car</p>
-          </NuxtLink>
-          <NuxtLink to="/sell-car">
+          </nuxt-link>
+          <nuxt-link to="/sell-car">
             <p class="menu_item">Sell Car</p>
-          </NuxtLink>
-          <NuxtLink to="/compare-cars">
+          </nuxt-link>
+          <nuxt-link to="/compare-cars">
             <p class="menu_item">Compare</p>
-          </NuxtLink>
-          <NuxtLink to="#">
+          </nuxt-link>
+          <nuxt-link to="#">
             <p class="menu_item">Verify a Car</p>
-          </NuxtLink>
-          <NuxtLink to="#">
+          </nuxt-link>
+          <nuxt-link to="#">
             <p class="menu_item">Solutions</p>
-          </NuxtLink>
+          </nuxt-link>
         </div>
       </div>
       <div class="navbar_rhs">
@@ -50,23 +50,23 @@
 const isSticky = ref(false);
 const productList = ref({});
 
-onMounted(() => {
-  console.log("the component is created");
-  window.addEventListener("scroll", this.makeHeaderSticky);
-});
-onBeforeUnmount(() => {
-  console.log("the component is destroyed");
-  window.removeEventListener("scroll", this.makeHeaderSticky);
-});
+// onMounted(() => {
+//   console.log("the component is created");
+//   window.addEventListener("scroll", this.makeHeaderSticky);
+// });
+// onBeforeUnmount(() => {
+//   console.log("the component is destroyed");
+//   window.removeEventListener("scroll", this.makeHeaderSticky);
+// });
 
-const makeHeaderSticky = () => {
-  if (window.scrollY > 0) {
-    isSticky.value = true;
-  } else {
-    isSticky.value = false;
-  }
-  console.log(isSticky.value);
-};
+// const makeHeaderSticky = () => {
+//   if (window.scrollY > 0) {
+//     isSticky.value = true;
+//   } else {
+//     isSticky.value = false;
+//   }
+//   console.log(isSticky.value);
+// };
 </script>
 
 <style scoped>

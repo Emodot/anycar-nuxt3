@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="product_list_ctn">
-      <CarCard :card-details="data" />
+      <CarCard :card-details="props.data" />
     </div>
     <div class="bottom_text">
       <p>
@@ -29,88 +29,30 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    data: {
+<script setup>
+const props = defineProps({
+  data: {
       type: Array,
-      default: () => []
-    }
+      required: true,
   },
-  data () {
-    return {
-      cars: [
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        },
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        },
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        },
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        },
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        },
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        }
-      ]
-    }
-  }
+});
 
-}
+// const { data } = props;
+
+// watch(() => props.data, (first, second) => {
+//   console.log('watch Props: ', first, second);
+//   props.data = first
+//   }
+// )
+// export default {
+//   props: {
+//     data: {
+//       type: Array,
+//       default: () => []
+//     }
+//   },
+
+// }
 </script>
 
 <style scoped>

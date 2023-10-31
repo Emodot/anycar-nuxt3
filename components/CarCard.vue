@@ -1,11 +1,22 @@
 <template>
   <div class="card_list">
-    <div v-for="(card, index) in cardDetails" :key="index" class="card_ctn" @click="selectProduct(card)">
-      <div class="card_image" :style="{ backgroundImage: `url(${card.images[0].urls})`, height: `${imgHeight}rem` }">
+    <div
+      v-for="(card, index) in props.cardDetails"
+      :key="index"
+      class="card_ctn"
+      @click="selectProduct(card)"
+    >
+      <div
+        class="card_image"
+        :style="{
+          backgroundImage: `url(${card.images[0].urls})`,
+          height: `${imgHeight}rem`,
+        }"
+      >
         <!-- <img :src="card.images[0].urls" alt=""> -->
       </div>
       <p class="card_title">
-        {{ capitalizeFirstLetter(card.make) }} - {{ capitalizeFirstLetter(card.model) }}
+        <!-- {{ capitalizeFirstLetter(card.make) }} - {{ capitalizeFirstLetter(card.model) }} -->
       </p>
       <div class="card_details">
         <p class="year">
@@ -15,7 +26,7 @@
         <p class="other_info">
           243 Miles
         </p> -->
-        <img class="dot" src="~assets/icons/Ellipse_3.svg" alt="">
+        <img class="dot" src="~assets/icons/Ellipse_3.svg" alt="" />
         <p class="other_info">
           {{ card.engineType }}
         </p>
@@ -26,70 +37,91 @@
       </div>
       <div class="bottom_section">
         <div class="card_amount">
-          <p>{{ currency(card.askingPrice, 'NGN') }}</p>
+          <!-- <p>{{ currency(card.askingPrice, 'NGN') }}</p> -->
         </div>
         <div class="card_type">
           <!-- <p>{{ card.condition }}</p> -->
-          <p>{{ capitalizeFirstLetter(card.condition) }}</p>
+          <!-- <p>{{ capitalizeFirstLetter(card.condition) }}</p> -->
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import functions from '@/utils/functions'
-export default {
-  props: {
-    cardDetails: {
-      type: Array,
-      default: () => []
-    },
-    imgHeight: {
-      type: Number,
-      default: () => 14
-    }
+<script setup>
+import functions from "@/utils/functions";
+const props = defineProps({
+  cardDetails: {
+    type: Array,
+    default: [],
   },
-  data () {
-    return {
-      firstCarId: '',
-      currency: functions.formatCurrency,
-      capitalizeFirstLetter: functions.capitalizeFirstLetter
-    }
+  imgHeight: {
+    type: Number,
+    default: 14,
   },
-  created () {
-    console.log(this.$route)
-  },
-  methods: {
-    selectProduct (card) {
-      if (this.$route.name === 'compare-cars-select-car') {
-        // this.$router.push(`/compare-cars/?firstCar=${card._id}`)
-        if (this.$route.query.firstCar === null) {
-          this.firstCarId = card._id
-          this.$router.push({
-            name: 'compare-cars-car_id',
-            query: {
-              firstCar: card._id
-            }
-          })
-        } else if (this.$route.query.secondCar === null) {
-          this.$router.push({
-            name: 'compare-cars-car_id',
-            query: {
-              firstCar: this.$route.query.firstCar,
-              secondCar: card._id
-            }
-          })
-        }
-      } else {
-        this.$router.push(`/buy-car/${card._id}`)
-      }
-      // console.log(card)
-      // this.$store.commit('setselectedProduct', card)
-    }
-  }
+});
 
-}
+const { cardDetails, imgHeight } = props;
+
+// console.log('CarCards', props.cardDetails);
+
+// watch(
+//   () => props.cardDetails, (first, second) => {
+//   console.log('Card Watch Props: ', first, second);
+//   props.cardDetails = first
+//   }
+// );
+// export default {
+//   props: {
+//     cardDetails: {
+//       type: Array,
+//       default: () => []
+//     },
+//     imgHeight: {
+//       type: Number,
+//       default: () => 14
+//     }
+//   },
+//   data () {
+//     return {
+//       firstCarId: '',
+//       currency: functions.formatCurrency,
+//       capitalizeFirstLetter: functions.capitalizeFirstLetter
+//     }
+//   },
+//   created () {
+//     console.log(this.$route)
+//   },
+//   methods: {
+//     selectProduct (card) {
+//       if (this.$route.name === 'compare-cars-select-car') {
+//         // this.$router.push(`/compare-cars/?firstCar=${card._id}`)
+//         if (this.$route.query.firstCar === null) {
+//           this.firstCarId = card._id
+//           this.$router.push({
+//             name: 'compare-cars-car_id',
+//             query: {
+//               firstCar: card._id
+//             }
+//           })
+//         } else if (this.$route.query.secondCar === null) {
+//           this.$router.push({
+//             name: 'compare-cars-car_id',
+//             query: {
+//               firstCar: this.$route.query.firstCar,
+//               secondCar: card._id
+//             }
+//           })
+//         }
+//       } else {
+//         this.$router.push(`/buy-car/${card._id}`)
+//       }
+//       // console.log(card)
+//       // this.$store.commit('setselectedProduct', card)
+//     }
+//   }
+
+// }
 </script>
 
 <style scoped>
@@ -104,7 +136,7 @@ export default {
   width: 31%;
   cursor: pointer;
   margin-bottom: 50px;
-  transition:  0.4s all ease-in-out;
+  transition: 0.4s all ease-in-out;
 }
 
 .card_ctn:hover {
@@ -161,7 +193,7 @@ export default {
   width: fit-content;
   padding: 12px 20px;
   border-radius: 5px;
-  background-color: #CCE6FF;
+  background-color: #cce6ff;
   margin-right: 10px;
 }
 
@@ -180,7 +212,7 @@ export default {
 }
 
 .card_type p {
-  color: #55003B;
+  color: #55003b;
   font-size: 12px;
   font-weight: 700;
 }

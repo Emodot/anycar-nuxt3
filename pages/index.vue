@@ -7,7 +7,7 @@
     </div>
     <PriceFilter />
     <div class="body_ctn">
-      <!-- <RecentlyUpdated :data="limitedCars" /> -->
+      <RecentlyUpdated :data="cars" />
       <CompareOptions />
       <DoMoreAnycar />
     </div>
@@ -15,35 +15,41 @@
 </template>
 
 <script setup>
-import axios from 'axios'
+import axios from "axios";
 const config = useRuntimeConfig();
 const baseUrl = config.public.BASE_URL;
 
-onMounted(() => {
-  fetchCars()
-})
+const cars = ref([]);
 
 const fetchCars = () => {
-  console.log(baseUrl);
+  // console.log(baseUrl);
   const path = "api/sell";
   axios
     .get(`${baseUrl}${path}`)
     .then((response) => {
       console.log(response);
-      const updatedCars = response.docs;
+      const updatedCars = response.data.docs;
       let limitedCars = updatedCars;
       if (updatedCars.length > 6) {
         limitedCars = updatedCars.slice(0, 6);
       }
+      cars.value = limitedCars
+      // console.log(cars);
     })
     .catch((error) => {
       const { message } = error?.response?.data;
       apiErrorMessage.value = message;
     })
     .finally(() => {
-      isFetching.value = false;
+      // isFetching.value = false;
     });
 };
+
+fetchCars();
+
+// onMounted(() => {
+//   fetchCars();
+// });
 </script>
 
 <style scoped>
