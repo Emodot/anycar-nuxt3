@@ -1,26 +1,32 @@
-export const state = () => ({
-  sellCarForm: {
-    makeId: 0,
-    make: '',
-    model: '',
-    year_manufacture: 0,
-    formattedYear: 0,
-    condition: '',
-    transmission_type: '',
-    interior_color: '',
-    exterior_color: '',
-    vin: '',
-    engine_type: '',
-    asking_price: '',
-    name: '',
-    email: '',
-    phone: '',
-    inspectionDate: '',
-    inspectionTime: ''
-  },
-  formProgress: {},
-  carOneDetails: {},
-  carTwoDetails: {}
+// import { defineStore } from "pinia";
+
+export const useSellCarStore = defineStore('SellCarStore', {
+  state: () => {
+    return {
+      sellCarForm: {
+        makeId: 0,
+        make: "",
+        model: "",
+        year_manufacture: 0,
+        formattedYear: 0,
+        condition: "",
+        transmission_type: "",
+        interior_color: "",
+        exterior_color: "",
+        vin: "",
+        engine_type: "",
+        asking_price: "",
+        name: "",
+        email: "",
+        phone: "",
+        inspectionDate: "",
+        inspectionTime: "",
+      },
+      formProgress: {},
+      carOneDetails: {},
+      carTwoDetails: {},
+    };
+  }
 })
 
 export const mutations = {

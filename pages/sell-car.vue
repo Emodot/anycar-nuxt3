@@ -3,37 +3,80 @@
     <div class="inner">
       <div class="top_section">
         <div>
-          <h2 class="title">
-            Sell your car, new or old
-          </h2>
+          <h2 class="title">Sell your car, new or old</h2>
           <p class="sub_title">
-            Kindly upload the details of your car, once approved, it will be visible to potential buyers
+            Kindly upload the details of your car, once approved, it will be
+            visible to potential buyers
           </p>
         </div>
       </div>
       <div class="main_section">
         <div class="lhs">
           <div class="lhs_img">
-            <img src="~assets/images/sell_car_img.jpg" alt="">
+            <img src="~assets/images/sell_car_img.jpg" alt="" />
           </div>
         </div>
         <div class="rhs">
           <div v-if="!carAdded" class="rhs_inner">
-            <SellCarOne v-if="formOne" :save-form="saveFormOne" :close-list="closeList" @next="toFormTwo()" />
-            <SellCarTwo v-if="formTwo" :save-form="saveFormTwo" @next="toFormThree()" />
-            <SellCarThree v-if="formThree" :save-form="saveFormThree" @next="submit" />
+            <SellCarOne
+              v-if="formOne"
+              :save-form="saveFormOne"
+              :close-list="closeList"
+              @next="toFormTwo()"
+            />
+            <SellCarTwo
+              v-if="formTwo"
+              :save-form="saveFormTwo"
+              @next="toFormThree()"
+            />
+            <SellCarThree
+              v-if="formThree"
+              :save-form="saveFormThree"
+              @next="submit"
+            />
             <div class="bottom_section">
               <div class="progress_bar">
-                <div :class="`progress_line ${formOneCompleted ? 'completed_line' : formOne ? 'active_line completed_line' : ''}`" />
-                <div :class="`progress_line ${formTwoCompleted ? 'completed_line' : formTwo ? 'active_line completed_line' : ''}`" />
-                <div :class="`progress_line ${formThreeCompleted ? 'completed_line' : formThree ? 'active_line completed_line' : ''}`" />
+                <div
+                  :class="`progress_line ${
+                    formOneCompleted
+                      ? 'completed_line'
+                      : formOne
+                      ? 'active_line completed_line'
+                      : ''
+                  }`"
+                />
+                <div
+                  :class="`progress_line ${
+                    formTwoCompleted
+                      ? 'completed_line'
+                      : formTwo
+                      ? 'active_line completed_line'
+                      : ''
+                  }`"
+                />
+                <div
+                  :class="`progress_line ${
+                    formThreeCompleted
+                      ? 'completed_line'
+                      : formThree
+                      ? 'active_line completed_line'
+                      : ''
+                  }`"
+                />
               </div>
               <div class="bottom_btns">
-                <button :class="`global_btn_2 ${formOne ? 'disabled_btn' : ''}`" @click="prevForm()">
+                <button
+                  :class="`global_btn_2 ${formOne ? 'disabled_btn' : ''}`"
+                  @click="prevForm()"
+                >
                   Prev
                 </button>
-                <button v-if="!loading" class="global_btn" @click="submitForm()">
-                  {{ formThree ? 'Submit' : 'Next' }}
+                <button
+                  v-if="!loading"
+                  class="global_btn"
+                  @click="submitForm()"
+                >
+                  {{ formThree ? "Submit" : "Next" }}
                 </button>
                 <button v-else class="global_btn" disabled>
                   <Loader class="come-down" />
@@ -48,154 +91,145 @@
   </div>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      saveFormOne: false,
-      saveFormTwo: false,
-      saveFormThree: false,
-      formOne: true,
-      formTwo: false,
-      formThree: false,
-      formOneCompleted: false,
-      formTwoCompleted: false,
-      formThreeCompleted: false,
-      carAdded: false,
-      loading: false,
-      dateTime: {
-        date: '',
-        time: ''
-      },
-      closeList: false
-    }
-  },
-  methods: {
-    submitForm () {
-      if (this.formOne) {
-        this.saveFormOne = true
-        this.saveFormTwo = false
-        this.saveFormThree = false
-      } else if (this.formTwo) {
-        this.saveFormTwo = true
-        this.saveFormOne = false
-        this.saveFormThree = false
-      } else {
-        this.saveFormThree = true
-        this.saveFormTwo = false
-        this.saveFormOne = false
-      }
-    },
-    toFormTwo () {
-      this.formOne = false
-      this.formTwo = true
-      this.formOneCompleted = true
-    },
-    toFormThree () {
-      this.formOne = false
-      this.formTwo = false
-      this.formThree = true
-      this.formTwoCompleted = true
-    },
-    async submit (data) {
-      this.loading = true
-      const form = this.$store.state.sellCarForm
-      const carImages = data
-      console.log(carImages)
-      const formattedYear = new Date(form.year_manufacture).getFullYear()
-      const convertedDate = new Date(form.inspectionDate)
-      // const displayDate = new Date(this.proposedInspectionDate).toLocaleDateString('en-us', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })
-      this.dateTime.date = form.inspectionDate
-      this.dateTime.time = form.inspectionTime
-      console.log(this.dateTime)
-      // console.log(form.inspectionDate)
-      const formdata = new FormData()
-      formdata.append('make', form.make)
-      formdata.append('model', form.model)
-      formdata.append('yearOfManufacture', formattedYear)
-      formdata.append('condition', form.condition)
-      formdata.append('transmissionType', form.transmission_type)
-      formdata.append('interiorColor', form.interior_color)
-      formdata.append('exteriorColor', form.exterior_color)
-      formdata.append('vin', form.vin)
-      formdata.append('engineType', form.engine_type)
-      formdata.append('name', form.name)
-      formdata.append('phoneNumber', form.phone)
-      for (let i = 0; i < carImages.length; i++) {
-        formdata.append('images', carImages[i])
-      }
-      formdata.append('email', form.email)
-      formdata.append('askingPrice', form.asking_price)
-      formdata.append('proposedInspectionDate', convertedDate)
-      formdata.append('proposedInspectionTime', form.inspectionTime)
-      console.log(formdata)
-      await this.$axios.$post('api/sell', formdata)
-        .then((response) => {
-          console.log(response)
-          this.carAdded = true
-          const clearedForm = {
-            makeId: 0,
-            make: '',
-            model: '',
-            year_manufacture: 0,
-            formattedYear: 0,
-            condition: '',
-            transmission_type: '',
-            interior_color: '',
-            exterior_color: '',
-            vin: '',
-            engine_type: '',
-            asking_price: '',
-            name: '',
-            email: '',
-            phone: '',
-            inspectionDate: '',
-            inspectionTime: ''
-          }
-          this.$store.commit('setSellCarForm', clearedForm)
-          this.$toaster.showToast({
-            content: response.data?.message || 'Car Listing created successfully',
-            state: 'success'
-          })
-        })
-        .catch((_err) => {
-          this.saveFormThree = false
-          const errorMsg = _err?.response?.data?.error || _err?.message
-          const feedback = {
-            content:
-              errorMsg || 'Oops, something went wrong, please try again later',
-            state: 'error'
-          }
-          console.log(feedback)
-          this.$toaster.showToast(feedback)
-        })
-        .finally(() => {
-          this.loading = false
-        })
-    },
-    prevForm () {
-      this.saveFormTwo = false
-      this.saveFormOne = false
-      this.saveFormThree = false
-      if (this.formTwo) {
-        this.formTwoCompleted = false
-        this.formOneCompleted = false
-        this.formTwo = false
-        this.formThree = false
-        this.formOne = true
-        console.log(this.formOne)
-      } else if (this.formThree) {
-        this.formThreeCompleted = false
-        this.formTwoCompleted = false
-        this.formThree = false
-        this.formTwo = true
-        this.formOne = false
-      } else {
-        console.log(this.formData)
-      }
-    }
+<script setup>
+import axios from "axios";
+const config = useRuntimeConfig();
+const baseUrl = config.public.BASE_URL;
+const sellCarData = useSellCarStore();
+// const { sellCarData } = storeToRefs(useSellCarStore());
+
+const saveFormOne = ref(false);
+const saveFormTwo = ref(false);
+const saveFormThree = ref(false);
+const formOne = ref(false);
+const formTwo = ref(false);
+const formThree = ref(false);
+const formOneCompleted = ref(false);
+const formTwoCompleted = ref(false);
+const formThreeCompleted = ref(false);
+const carAdded = ref(false);
+const loading = ref(false);
+const dateTime = ref({
+  date: "",
+  time: "",
+});
+const closeList = ref(false);
+
+const submitForm = () => {
+  if (formOne.value) {
+    saveFormOne.value = true;
+    saveFormTwo.value = false;
+    saveFormThree.value = false;
+  } else if (formTwo.value) {
+    saveFormTwo.value = true;
+    saveFormOne.value = false;
+    saveFormThree.value = false;
+  } else {
+    saveFormThree.value = true;
+    saveFormTwo.value = false;
+    saveFormOne.value = false;
   }
-}
+};
+const toFormTwo = () => {
+  formOne.value = false;
+  formTwo.value = true;
+  formOneCompleted.value = true;
+};
+const toFormThree = () => {
+  formOne.value = false;
+  formTwo.value = false;
+  formThree.value = true;
+  formTwoCompleted.value = true;
+};
+const prevForm = () => {
+  saveFormTwo.value = false;
+  saveFormOne.value = false;
+  saveFormThree.value = false;
+  if (formTwo.value) {
+    formTwoCompleted.value = false;
+    formOneCompleted.value = false;
+    formTwo.value = false;
+    formThree.value = false;
+    formOne.value = true;
+    console.log(formOne.value);
+  } else if (formThree.value) {
+    formThreeCompleted.value = false;
+    formTwoCompleted.value = false;
+    formThree.value = false;
+    formTwo.value = true;
+    formOne.value = false;
+  } else {
+    console.log(formData.value);
+  }
+};
+
+const submit = (data) => {
+  loading.value = true;
+  const form = sellCarData.sellCarForm;
+  console.log(form);
+  const carImages = data;
+  console.log(carImages);
+  const formattedYear = new Date(form.year_manufacture).getFullYear();
+  const convertedDate = new Date(form.inspectionDate);
+  dateTime.date.value = form.inspectionDate;
+  dateTime.time.value = form.inspectionTime;
+  console.log(dateTime);
+  const formdata = new FormData();
+  formdata.append("make", form.make);
+  formdata.append("model", form.model);
+  formdata.append("yearOfManufacture", formattedYear);
+  formdata.append("condition", form.condition);
+  formdata.append("transmissionType", form.transmission_type);
+  formdata.append("interiorColor", form.interior_color);
+  formdata.append("exteriorColor", form.exterior_color);
+  formdata.append("vin", form.vin);
+  formdata.append("engineType", form.engine_type);
+  formdata.append("name", form.name);
+  formdata.append("phoneNumber", form.phone);
+  for (let i = 0; i < carImages.length; i++) {
+    formdata.append("images", carImages[i]);
+  }
+  formdata.append("email", form.email);
+  formdata.append("askingPrice", form.asking_price);
+  formdata.append("proposedInspectionDate", convertedDate);
+  formdata.append("proposedInspectionTime", form.inspectionTime);
+  console.log(formdata);
+  const path = "api/sell";
+  axios
+    .post(`${baseUrl}${path}`, formdata)
+    .then((response) => {
+      console.log(response);
+      carAdded = true;
+      const clearedForm = {
+        makeId: 0,
+        make: "",
+        model: "",
+        year_manufacture: 0,
+        formattedYear: 0,
+        condition: "",
+        transmission_type: "",
+        interior_color: "",
+        exterior_color: "",
+        vin: "",
+        engine_type: "",
+        asking_price: "",
+        name: "",
+        email: "",
+        phone: "",
+        inspectionDate: "",
+        inspectionTime: "",
+      };
+      // sellCarData.commit("setSellCarForm", clearedForm);
+    })
+    .catch((_err) => {
+      saveFormThree.value = false;
+      const { message } = _err?.response?.data?.error || _err?.message;
+      apiErrorMessage.value = message;
+    })
+    .finally(() => {
+      loading.value = false;
+    });
+};
 </script>
 
 <style scoped>
@@ -244,7 +278,7 @@ export default {
 
 .rhs_inner {
   height: fit-content;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .bottom_section {
@@ -264,8 +298,8 @@ export default {
   height: 5px;
   border-radius: 30px;
   margin-right: 15px;
-  background-color: rgba(21, 10, 65, 0.20);
-  transition: .5s;
+  background-color: rgba(21, 10, 65, 0.2);
+  transition: 0.5s;
 }
 
 .completed_line {
