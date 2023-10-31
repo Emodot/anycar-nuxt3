@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-const emit = defineEmits(['changePage'])
+const emit = defineEmits(["changePage"]);
 const props = defineProps({
   paginationData: {
     type: Object,
@@ -44,7 +44,7 @@ const props = defineProps({
   },
 });
 
-console.log('pagination', props.paginationData);
+console.log("pagination", props.paginationData);
 
 const changePage = (num) => {
   if (props.paginationData.page.value !== num) {
