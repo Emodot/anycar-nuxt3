@@ -31,30 +31,30 @@ export default {
       state: ''
     }
   },
-  mounted () {
-    this.$store.subscribe((mutation, state) => {
-      if (mutation.type === 'toast/showToast') {
-        this.message = state.toast.content
-        this.state = state.toast.state
-        this.toastIsVisible = true
-        document.querySelector('.toast-element').classList.add('enter')
+  // mounted () {
+  //   this.$store.subscribe((mutation, state) => {
+  //     if (mutation.type === 'toast/showToast') {
+  //       this.message = state.toast.content
+  //       this.state = state.toast.state
+  //       this.toastIsVisible = true
+  //       document.querySelector('.toast-element').classList.add('enter')
 
-        setTimeout(() => {
-          if (this.toastIsVisible) {
-            this.removeToast()
-          }
-        }, 3000)
-      }
-    })
-  },
-  methods: {
-    removeToast () {
-      document.querySelector('.toast-element').classList.replace('enter', 'leave')
-      setTimeout(() => {
-        this.toastIsVisible = false
-      }, 240)
-    }
-  }
+  //       setTimeout(() => {
+  //         if (this.toastIsVisible) {
+  //           this.removeToast()
+  //         }
+  //       }, 3000)
+  //     }
+  //   })
+  // },
+  // methods: {
+  //   removeToast () {
+  //     document.querySelector('.toast-element').classList.replace('enter', 'leave')
+  //     setTimeout(() => {
+  //       this.toastIsVisible = false
+  //     }, 240)
+  //   }
+  // }
 }
 </script>
 
