@@ -16,7 +16,7 @@
         <!-- <img :src="card.images[0].urls" alt=""> -->
       </div>
       <p class="card_title">
-        <!-- {{ capitalizeFirstLetter(card.make) }} - {{ capitalizeFirstLetter(card.model) }} -->
+        {{ functions.capitalizeFirstLetter(card.make) }} - {{ functions.capitalizeFirstLetter(card.model) }}
       </p>
       <div class="card_details">
         <p class="year">
@@ -37,11 +37,11 @@
       </div>
       <div class="bottom_section">
         <div class="card_amount">
-          <!-- <p>{{ currency(card.askingPrice, 'NGN') }}</p> -->
+          <p>{{ functions.formatCurrency(card.askingPrice, 'NGN') }}</p>
         </div>
         <div class="card_type">
           <!-- <p>{{ card.condition }}</p> -->
-          <!-- <p>{{ capitalizeFirstLetter(card.condition) }}</p> -->
+          <p>{{ functions.capitalizeFirstLetter(card.condition) }}</p>
         </div>
       </div>
     </div>
@@ -49,7 +49,6 @@
 </template>
 
 <script setup>
-import functions from "@/utils/functions";
 const props = defineProps({
   cardDetails: {
     type: Array,

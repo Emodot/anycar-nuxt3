@@ -102,8 +102,8 @@ const getCars = (currentPage, make, year, maxPrice, maxMileage, type) => {
   axios
     .get(`${baseUrl}${path}`)
     .then((response) => {
-      console.log(response);
-      cars.value = response;
+      console.log(response.data);
+      cars.value = response.data;
     })
     .catch((_err) => {
       const errorMsg = _err?.response?.data?.error || _err?.message;

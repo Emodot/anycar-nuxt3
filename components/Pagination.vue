@@ -1,46 +1,56 @@
 <template>
   <div class="pagination_ctn">
-    <button class="global_btn_2">
-      LOAD MORE
-    </button>
+    <button class="global_btn_2">LOAD MORE</button>
     <div class="pagination_num_ctn">
-      <span class="material-icons-outlined" :class="`${!paginationData.hasPrevPage ? 'disable_arrow' : ''}`">
+      <span
+        class="material-icons-outlined"
+        :class="`${!props.paginationData.hasPrevPage ? 'disable_arrow' : ''}`"
+      >
         chevron_left
       </span>
       <div class="num_ctn">
-        <div v-for="num in paginationData.totalPages > 4 ? 4 : paginationData.totalPages" :key="num" class="num" :class="`${paginationData.page === num ? 'active_num' : ''}`" @click="changePage(num)">
+        <div
+          v-for="num in props.paginationData.totalPages > 4
+            ? 4
+            : props.paginationData.totalPages"
+          :key="num"
+          class="num"
+          :class="`${props.paginationData.page === num ? 'active_num' : ''}`"
+          @click="changePage(num)"
+        >
           {{ num }}
         </div>
       </div>
-      <p v-if="paginationData.totalPages > 4" class="dots">
-        ...
-      </p>
-      <div v-if="paginationData.totalPages > 4" class="num">
-        {{ paginationData.totalPages }}
+      <p v-if="props.paginationData.totalPages > 4" class="dots">...</p>
+      <div v-if="props.paginationData.totalPages > 4" class="num">
+        {{ props.paginationData.totalPages }}
       </div>
-      <span class="material-icons-outlined" :class="`${!paginationData.hasNextPage ? 'disable_arrow' : ''}`">
+      <span
+        class="material-icons-outlined"
+        :class="`${!props.paginationData.hasNextPage ? 'disable_arrow' : ''}`"
+      >
         chevron_right
       </span>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    paginationData: {
-      type: Object,
-      default: () => {}
-    }
+<script setup>
+const emit = defineEmits(['changePage'])
+const props = defineProps({
+  paginationData: {
+    type: Object,
+    default: {},
   },
-  methods: {
-    changePage (num) {
-      if (this.paginationData.page !== num) {
-        this.$emit('changePage', num)
-      }
-    }
+});
+
+console.log('pagination', props.paginationData);
+
+const changePage = (num) => {
+  if (props.paginationData.page.value !== num) {
+    emit("changePage", num);
   }
-}
+};
 </script>
 
 <style scoped>
@@ -86,7 +96,7 @@ export default {
 
 .active_num {
   font-weight: 600;
-  background-color: #CCE6FF;
+  background-color: #cce6ff;
   color: var(--primary-color);
 }
 
