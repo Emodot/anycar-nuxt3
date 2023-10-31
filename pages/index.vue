@@ -7,7 +7,7 @@
     </div>
     <PriceFilter />
     <div class="body_ctn">
-      <RecentlyUpdated :data="cars" />
+      <RecentlyUpdated :data="cars" :loading="fetchCarsLoading" />
       <CompareOptions />
       <DoMoreAnycar />
     </div>
@@ -20,8 +20,10 @@ const config = useRuntimeConfig();
 const baseUrl = config.public.BASE_URL;
 
 const cars = ref([]);
+const fetchCarsLoading = ref(false);
 
 const fetchCars = () => {
+  fetchCarsLoading.value = true;
   // console.log(baseUrl);
   const path = "api/sell";
   axios
@@ -33,7 +35,7 @@ const fetchCars = () => {
       if (updatedCars.length > 6) {
         limitedCars = updatedCars.slice(0, 6);
       }
-      cars.value = limitedCars
+      cars.value = limitedCars;
       // console.log(cars);
     })
     .catch((error) => {
@@ -41,7 +43,7 @@ const fetchCars = () => {
       apiErrorMessage.value = message;
     })
     .finally(() => {
-      // isFetching.value = false;
+      fetchCarsLoading.value = false;
     });
 };
 

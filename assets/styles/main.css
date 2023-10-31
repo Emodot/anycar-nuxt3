@@ -77,6 +77,14 @@ h1 {
 	margin-bottom: 10px;
 }
 
+.page_loader_ctn {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .v-money {
 	border-radius: 6px;
 	border: 1px solid var(--primary-color);

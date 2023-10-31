@@ -5,7 +5,7 @@
         <h2 class="title">Search for Cars on AnyCar</h2>
         <SearchInput />
         <div class="content">
-          <!-- <FilterCars
+          <FilterCars
             :data="cars"
             :loading="getCarsLoading"
             @changePage="changePage"
@@ -14,7 +14,7 @@
             @filterPrice="filterPrice"
             @filterMileage="filterMileage"
             @filterType="filterType"
-          /> -->
+          />
         </div>
       </div>
     </div>
@@ -35,67 +35,63 @@ const maxPrice = ref("");
 const maxMileage = ref("");
 const type = ref("");
 
-onMounted(() => {
-  getCars(
-    this.currentPage,
-    this.make,
-    this.year,
-    this.maxPrice,
-    this.maxMileage,
-    this.type
-  );
-});
-
 const changePage = (val) => {
-  getCars(val, this.make, this.year, this.maxPrice, this.maxMileage, this.type);
+  getCars(
+    val,
+    make.value,
+    year.value,
+    maxPrice.value,
+    maxMileage.value,
+    type.value
+  );
 };
 const filterMake = (val) => {
   getCars(
-    this.currentPage,
+    currentPage.value,
     val,
-    this.year,
-    this.maxPrice,
-    this.maxMileage,
-    this.type
+    year.value,
+    maxPrice.value,
+    maxMileage.value,
+    type.value
   );
 };
 const filterYear = (val) => {
   getCars(
-    this.currentPage,
-    this.make,
+    currentPage.value,
+    make.value,
     val,
-    this.maxPrice,
-    this.maxMileage,
-    this.type
+    maxPrice.value,
+    maxMileage.value,
+    type.value
   );
 };
 const filterPrice = (val) => {
   getCars(
-    this.currentPage,
-    this.make,
-    this.year,
+    currentPage.value,
+    make.value,
+    year.value,
     val,
-    this.maxMileage,
-    this.type
+    maxMileage.value,
+    type.value
   );
 };
 const filterMileage = (val) => {
   getCars(
-    this.currentPage,
-    this.make,
-    this.year,
-    this.maxPrice,
+    currentPage.value,
+    make.value,
+    year.value,
+    maxPrice.value,
     val,
-    this.type
+    type.value
   );
 };
 const filterType = (val) => {
   getCars(
-    this.currentPage,
-    this.make,
-    this.year,
-    this.maxPrice,
-    this.maxMileage,
+    currentPage.value,
+    make.value,
+    year.value,
+    maxPrice.value,
+    maxMileage.value,
     val
   );
 };
@@ -120,9 +116,18 @@ const getCars = (currentPage, make, year, maxPrice, maxMileage, type) => {
       // this.$toaster.showToast(feedback);
     })
     .finally(() => {
-      this.getCarsLoading = false;
+      getCarsLoading.value = false;
     });
 };
+
+getCars(
+  currentPage.value,
+  make.value,
+  year.value,
+  maxPrice.value,
+  maxMileage.value,
+  type.value
+);
 </script>
 
 <style scoped>
