@@ -105,8 +105,8 @@
     <div class="rhs">
       <div v-if="!props.loading" class="product_list_ctn">
         <CarCard
-          v-if="props.data.data?.docs?.length"
-          :card-details="data.data?.docs"
+          v-if="props.data?.docs?.length"
+          :card-details="data?.docs"
           :img-height="11"
         />
         <div v-else class="empty_state_ctn">
@@ -174,8 +174,8 @@
         <PageLoader />
       </div>
       <Pagination
-        v-if="props.data.data?.docs?.length"
-        :pagination-data="data"
+        v-if="props.data?.docs?.length"
+        :pagination-data="props.data"
         @changePage="change"
       />
     </div>
@@ -183,6 +183,7 @@
 </template>
 
 <script setup>
+const emit = defineEmits(['changePage', 'filterMake', 'filterYear', 'filterPrice', 'filterMileage', 'filterType']);
 const props = defineProps({
   data: {
     type: Object,
@@ -222,12 +223,12 @@ const toggleTypeTab = () => {
 };
 
 const change = (val) => {
-  this.$emit("changePage", val);
+  emit("changePage", val);
 };
 const filterMake = () => {
   const data = makeFilter.value;
   console.log(data);
-  this.$emit("filterMake", data);
+  emit("filterMake", data);
 };
 const filterYear = () => {
   let data = "";
@@ -235,7 +236,7 @@ const filterYear = () => {
     data = parseInt(yearFilter.value);
   }
   console.log(data);
-  this.$emit("filterYear", data);
+  emit("filterYear", data);
 };
 const filterPrice = () => {
   let data = "";
@@ -243,7 +244,7 @@ const filterPrice = () => {
     data = parseInt(priceFilter.value);
   }
   console.log(data);
-  this.$emit("filterPrice", data);
+  emit("filterPrice", data);
 };
 const filterMileage = () => {
   let data = "";
@@ -251,7 +252,7 @@ const filterMileage = () => {
     data = parseInt(mileageFilter.value);
   }
   console.log(data);
-  this.$emit("filterMileage", data);
+  emit("filterMileage", data);
 };
 const filterType = () => {
   let data = "";
@@ -259,7 +260,7 @@ const filterType = () => {
     data = parseInt(typeFilter.value);
   }
   console.log(data);
-  this.$emit("filterType", data);
+  emit("filterType", data);
 };
 </script>
 
