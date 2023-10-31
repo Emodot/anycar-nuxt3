@@ -2,29 +2,27 @@
   <div class="products_ctn">
     <div class="top_section">
       <div>
-        <h2 class="title">
-          Recently Updated Cars
-        </h2>
+        <h2 class="title">Recently Updated Cars</h2>
         <p class="sub_title">
           Check the varieties of cars recently updated on our lots
         </p>
       </div>
       <div class="tab_section">
-        <button class="global_btn">
-          Search for Cars
-        </button>
+        <button class="global_btn">Search for Cars</button>
       </div>
     </div>
-    <div class="product_list_ctn">
+    <div v-if="!props.loading" class="product_list_ctn">
       <CarCard :card-details="props.data" />
+    </div>
+    <div v-else class="page_loader_ctn">
+      <PageLoader />
     </div>
     <div class="bottom_text">
       <p>
-        Didn’t find what you were looking for? <span class="bottom_link">See more</span>
+        Didn’t find what you were looking for?
+        <span class="bottom_link">See more</span>
       </p>
-      <span class="material-icons-outlined">
-        arrow_forward
-      </span>
+      <span class="material-icons-outlined"> arrow_forward </span>
     </div>
   </div>
 </template>
@@ -32,9 +30,13 @@
 <script setup>
 const props = defineProps({
   data: {
-      type: Array,
-      required: true,
+    type: Array,
+    required: true,
   },
+  loading: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 // const { data } = props;
@@ -139,5 +141,4 @@ const props = defineProps({
     margin-bottom: 30px;
   }
 }
-
 </style>
