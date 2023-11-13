@@ -12,9 +12,10 @@
     </div>
     <div class="body_ctn">
       <RecentlyUpdated :data="cars" :loading="fetchCarsLoading" />
-      <CompareOptions />
-      <DoMoreAnycar />
+      <HomeCompareOptions />
+      <HomeDoMoreAnycar />
     </div>
+    <HomeSellCarSection />
   </div>
 </template>
 
