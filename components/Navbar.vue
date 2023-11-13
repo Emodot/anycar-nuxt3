@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar_ctn" :class="{ sticky: isSticky }">
+  <div class="navbar_ctn">
     <div class="navbar_inner">
       <div class="navbar_lhs">
         <div class="logo">
@@ -71,12 +71,11 @@ const productList = ref({});
 
 <style scoped>
 .navbar_ctn {
-  background-color: transparent;
+  background-color: white;
   /* box-shadow: 0px 5px 20px #dadada; */
   position: fixed;
   width: 100%;
   z-index: 5;
-  transition: background-color 0.3s;
 }
 .navbar_inner {
   max-width: 1344px;
@@ -154,27 +153,6 @@ const productList = ref({});
   font-size: 12px;
   color: white;
   line-height: 19px;
-}
-
-/* Sticky header styles */
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  animation: fadeInDown 0.3s;
-  background-color: #ffffff;
-  z-index: 20;
-}
-
-@keyframes fadeInDown {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }
 
 .mobile_menu {

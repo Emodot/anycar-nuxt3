@@ -2,10 +2,14 @@
   <div class="main_ctn">
     <div class="hero_ctn">
       <div class="hero_inner">
-        <SearchInput />
+        <div class="hero_lhs">
+          <p>Buy Car on financing and pay easily within 48 months.</p>
+        </div>
+        <div class="hero_rhs">
+          <PriceFilter />
+        </div>
       </div>
     </div>
-    <PriceFilter />
     <div class="body_ctn">
       <RecentlyUpdated :data="cars" :loading="fetchCarsLoading" />
       <CompareOptions />
@@ -21,7 +25,6 @@ const baseUrl = config.public.BASE_URL;
 
 const cars = ref([]);
 const fetchCarsLoading = ref(false);
-
 
 const fetchCars = () => {
   fetchCarsLoading.value = true;
@@ -61,13 +64,32 @@ fetchCars();
 .hero_ctn {
   background-image: url("assets/images/hero-1.jpg");
   background-size: cover;
-  height: 70vh;
+  height: 100vh;
   padding: 120px 0;
+  display: flex;
+  align-items: center;
 }
 .hero_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   max-width: 1344px;
   width: 80%;
   margin: auto;
+}
+
+.hero_lhs {
+  flex-basis: 45%;
+}
+
+.hero_rhs {
+  flex-basis: 40%;
+}
+
+.hero_lhs p {
+  color: white;
+  font-size: 50px;
+  font-weight: 900;
 }
 
 /* .search_input {
