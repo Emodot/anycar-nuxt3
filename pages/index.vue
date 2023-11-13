@@ -60,8 +60,9 @@ fetchCars();
 </script>
 
 <style scoped>
-/* .main_ctn {
-} */
+.main_ctn {
+	background-color: #F2F4F7;
+}
 .hero_ctn {
   background-image: url("assets/images/hero-1.jpg");
   background-size: cover;

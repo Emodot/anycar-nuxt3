@@ -166,9 +166,23 @@ const { cardDetails, imgHeight } = props;
   /* transition: transform .5s; */
 }
 
-/* .card_image img {
-  width: 100%;
-} */
+.card_type {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: fit-content;
+  padding: 3px 6px;
+  border-radius: 50px;
+  background-color: #ffb800;
+  /* margin-right: 10px; */
+}
+
+.card_type p {
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 
 .card_title {
   margin: 15px 0;
@@ -219,22 +233,6 @@ const { cardDetails, imgHeight } = props;
   font-size: 18px;
   font-weight: 800;
   margin-bottom: 15px;
-}
-.card_type {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  width: fit-content;
-  padding: 3px 6px;
-  border-radius: 5px;
-  background-color: #ffb800;
-  /* margin-right: 10px; */
-}
-
-.card_type p {
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
 }
 
 @media only screen and (max-width: 1200px) {

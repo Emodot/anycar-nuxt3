@@ -13,7 +13,10 @@
             @filterYear="filterYear"
             @filterPrice="filterPrice"
             @filterMileage="filterMileage"
-            @filterType="filterType"
+            @filterEngineType="filterEngineType"
+            @filterTransmissionType="filterTransmissionType"
+            @filterCondition="filterCondition"
+            @filterFuelType="filterFuelType"
           />
         </div>
       </div>
@@ -33,7 +36,10 @@ const make = ref("");
 const year = ref("");
 const maxPrice = ref("");
 const maxMileage = ref("");
-const type = ref("");
+const engineType = ref("");
+const transmissionType = ref("");
+const condition = ref("");
+const fuelType = ref("");
 
 const changePage = (val) => {
   getCars(
@@ -42,7 +48,10 @@ const changePage = (val) => {
     year.value,
     maxPrice.value,
     maxMileage.value,
-    type.value
+    engineType.value,
+    transmissionType.value,
+    condition.value,
+    fuelType.value
   );
 };
 const filterMake = (val) => {
@@ -52,7 +61,10 @@ const filterMake = (val) => {
     year.value,
     maxPrice.value,
     maxMileage.value,
-    type.value
+    engineType.value,
+    transmissionType.value,
+    condition.value,
+    fuelType.value
   );
 };
 const filterYear = (val) => {
@@ -62,7 +74,10 @@ const filterYear = (val) => {
     val,
     maxPrice.value,
     maxMileage.value,
-    type.value
+    engineType.value,
+    transmissionType.value,
+    condition.value,
+    fuelType.value
   );
 };
 const filterPrice = (val) => {
@@ -72,7 +87,10 @@ const filterPrice = (val) => {
     year.value,
     val,
     maxMileage.value,
-    type.value
+    engineType.value,
+    transmissionType.value,
+    condition.value,
+    fuelType.value
   );
 };
 const filterMileage = (val) => {
@@ -82,16 +100,61 @@ const filterMileage = (val) => {
     year.value,
     maxPrice.value,
     val,
-    type.value
+    engineType.value,
+    transmissionType.value,
+    condition.value,
+    fuelType.value
   );
 };
-const filterType = (val) => {
+const filterEngineType = (val) => {
   getCars(
     currentPage.value,
     make.value,
     year.value,
     maxPrice.value,
     maxMileage.value,
+    val,
+    transmissionType.value,
+    condition.value,
+    fuelType.value
+  );
+};
+const filterTransmissionType = (val) => {
+  getCars(
+    currentPage.value,
+    make.value,
+    year.value,
+    maxPrice.value,
+    maxMileage.value,
+    engineType.value,
+    val,
+    condition.value,
+    fuelType.value
+  );
+};
+const filterCondition = (val) => {
+  getCars(
+    currentPage.value,
+    make.value,
+    year.value,
+    maxPrice.value,
+    maxMileage.value,
+    engineType.value,
+    transmissionType.value,
+    val,
+    fuelType.value
+  );
+};
+const filterFuelType = (val) => {
+  getCars(
+    currentPage.value,
+    make.value,
+    year.value,
+    maxPrice.value,
+    maxMileage.value,
+    engineType.value,
+    transmissionType.value,
+    condition.value,
     val
   );
 };
@@ -126,13 +189,17 @@ getCars(
   year.value,
   maxPrice.value,
   maxMileage.value,
-  type.value
+  engineType.value,
+  transmissionType.value,
+  condition.value,
+  fuelType.value
 );
 </script>
 
 <style scoped>
 .main_ctn {
   padding: 120px 0;
+	background-color: #F2F4F7;
 }
 
 .inner {
