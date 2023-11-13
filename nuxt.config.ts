@@ -24,7 +24,11 @@ export default defineNuxtConfig({
         autoImports: ["defineStore", "acceptHMRUpdate"],
       },
     ],
+    "@pinia-plugin-persistedstate/nuxt",
   ],
+  piniaPersistedstate: {
+    storage: "localStorage",
+  },
   runtimeConfig: {
     public: {
       BASE_URL: process.env.BASE_URL || "https://cara-4oc8.onrender.com/",
