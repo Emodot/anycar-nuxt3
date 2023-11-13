@@ -6,17 +6,22 @@
       class="card_ctn"
       @click="selectProduct(card)"
     >
-      <div
-        class="card_image"
-        :style="{
-          backgroundImage: `url(${card.images[0].urls})`,
-          height: `${imgHeight}rem`,
-        }"
-      >
-        <!-- <img :src="card.images[0].urls" alt=""> -->
+      <div class="card_image_ctn">
+        <div
+          class="card_image"
+          :style="{
+            backgroundImage: `url(${card.images[0].urls})`,
+            height: `${imgHeight}rem`,
+          }"
+        >
+        </div>
+          <div class="card_type">
+            <p>{{ functions.capitalizeFirstLetter(card.condition) }}</p>
+          </div>
       </div>
       <p class="card_title">
-        {{ functions.capitalizeFirstLetter(card.make) }} - {{ functions.capitalizeFirstLetter(card.model) }}
+        {{ functions.capitalizeFirstLetter(card.make) }} -
+        {{ functions.capitalizeFirstLetter(card.model) }}
       </p>
       <div class="card_details">
         <p class="year">
@@ -35,13 +40,12 @@
           {{ capitalizeFirstLetter(card.condition) }}
         </p> -->
       </div>
+      <p class="card_amount">
+        {{ functions.formatCurrency(card.askingPrice, "NGN") }}
+      </p>
       <div class="bottom_section">
-        <div class="card_amount">
-          <p>{{ functions.formatCurrency(card.askingPrice, 'NGN') }}</p>
-        </div>
-        <div class="card_type">
-          <!-- <p>{{ card.condition }}</p> -->
-          <p>{{ functions.capitalizeFirstLetter(card.condition) }}</p>
+        <div class="card_btn">
+          <p>View Details</p>
         </div>
       </div>
     </div>
@@ -135,22 +139,30 @@ const { cardDetails, imgHeight } = props;
   width: 31%;
   cursor: pointer;
   margin-bottom: 50px;
-  transition: 0.4s all ease-in-out;
 }
 
-.card_ctn:hover {
-  -ms-transform: scale(1.05); /* IE 9 */
-  -webkit-transform: scale(1.05); /* Safari 3-8 */
-  transform: scale(1.05);
+.card_image_ctn {
+  position: relative;
+  width: 100%;
+  height: 14rem;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.card_image_ctn:hover .card_image {
+  -ms-transform: scale(1.05, 1.05);
+  -webkit-transform: scale(1.05, 1.05);
+  transform: scale(1.05, 1.05);
 }
 
 .card_image {
   width: 100%;
-  height: 14rem;
+  height: 100%;
   border-radius: 20px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  transition: 0.4s all ease-in-out;
   /* transition: transform .5s; */
 }
 
@@ -160,13 +172,13 @@ const { cardDetails, imgHeight } = props;
 
 .card_title {
   margin: 15px 0;
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 800;
 }
 
 .card_details {
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .year {
@@ -187,31 +199,40 @@ const { cardDetails, imgHeight } = props;
   display: flex;
 }
 
-.card_amount {
+.card_btn {
   min-width: 7rem;
   width: fit-content;
   padding: 12px 20px;
   border-radius: 5px;
-  background-color: #cce6ff;
+  background-color: var(--primary-color);
   margin-right: 10px;
 }
 
-.card_amount p {
-  color: var(--primary-color);
+.card_btn p {
+  color: white;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 800;
+}
+
+.card_amount {
+  color: var(--primary-color);
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 15px;
 }
 .card_type {
-  min-width: 5rem;
+  position: absolute;
+  right: 10px;
+  top: 10px;
   width: fit-content;
-  padding: 12px 20px;
+  padding: 3px 6px;
   border-radius: 5px;
-  background-color: #150a4133;
-  margin-right: 10px;
+  background-color: #ffb800;
+  /* margin-right: 10px; */
 }
 
 .card_type p {
-  color: #55003b;
+  color: white;
   font-size: 12px;
   font-weight: 700;
 }
