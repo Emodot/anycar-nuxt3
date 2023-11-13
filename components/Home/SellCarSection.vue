@@ -1,20 +1,23 @@
 <template>
-  <div class="do_more_ctn">
+  <div class="container">
+    <div class="sell_car_ctn">
     <div class="lhs">
       <h1>
-        Do more with ease on AnyCar
+        Sell your car here and Reach Thousands of Car Buyers Today
       </h1>
       <p class="sub_title">
-        Check our Mega Solutions like Car Financing, Registration, maintenance and Insurance
+        Expand your car business by showcasing and selling your inventory to a wide audience of potential customers through our app's thriving marketplace.
       </p>
       <button class="global_btn">
-        <p>Solutions</p>
-        <span class="material-icons-outlined">
+        <p>Sell Car</p>
+        <!-- <span class="material-icons-outlined">
           chevron_right
-        </span>
+        </span> -->
       </button>
     </div>
-    <div class="rhs" />
+    <div class="rhs">
+    </div>
+  </div>
   </div>
 </template>
 
@@ -28,25 +31,35 @@ export default {
 h1, p {
   color: white;
 }
-.do_more_ctn {
-  padding: 7rem;
-  background-image: url('assets/images/aesthetic-vehicle-bg.png');
+
+.container  {
+  padding: 7rem 0;
+  background-image: url('assets/images/sell_car_section_img.jpg');
   background-position: center;
   background-size: cover;
-  border-radius: 40px;
+}
+.sell_car_ctn {
+  max-width: 1344px;
+  width: 80%;
+  margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10rem;
+  /* margin-top: 10rem; */
 }
 
 .lhs {
-  flex-basis: 30%;
+  flex-basis: 50%;
+}
+
+h1 {
+  font-weight: 900;
 }
 
 .sub_title {
   margin-top: 2rem;
   line-height: 20px;
+  width: 80%;
 }
 
 .global_btn {
@@ -67,7 +80,7 @@ h1, p {
 }
 
 .rhs {
-  flex-basis: 45%;
+  flex-basis: 30%;
   display: flex;
   justify-content: flex-end;
 }
@@ -88,12 +101,12 @@ h1, p {
   .lhs {
     flex-basis: 50%;
   }
-  .do_more_ctn {
+  .sell_car_ctn {
     background-position: left;
   }
 }
 @media only screen and (max-width: 900px) {
-  .do_more_ctn {
+  .sell_car_ctn {
     padding: 4rem;
   }
 }
@@ -105,10 +118,10 @@ h1, p {
   .rhs {
     display: none;
   }
-  .do_more_ctn {
+  .sell_car_ctn {
     background-position: center;
   }
-  .do_more_ctn {
+  .sell_car_ctn {
     padding: 2.5rem;
   }
 

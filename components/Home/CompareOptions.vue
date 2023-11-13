@@ -2,38 +2,18 @@
   <div class="compare_ctn">
     <div class="lhs">
       <h1>
-        Don’t know what to go for? You can compare your options.
+        Compare Car Features and Make the Right Choice: Find Your Ideal Ride Today
       </h1>
       <p class="sub_title">
-        Check the varieties of cars recently updated on our lots
+        Discover the perfect car for your needs by easily comparing the features of different models and make a confident purchase decision.
       </p>
-      <!-- <div class="add_car_section">
-        <div class="add_car_btn" @click="$router.push('/compare-cars')">
-          <span class="material-icons-outlined">
-            add_circle_outline
-          </span>
-          <p>ADD CAR</p>
-          <span class="material-icons-outlined">
-            expand_more
-          </span>
-        </div>
-        <div class="add_car_btn">
-          <span class="material-icons-outlined">
-            add_circle_outline
-          </span>
-          <p>ADD CAR</p>
-          <span class="material-icons-outlined">
-            expand_more
-          </span>
-        </div>
-      </div> -->
       <button class="global_btn" @click="$router.push('/compare-cars')">
-        Compare
+        Compare Cars
       </button>
     </div>
     <div class="rhs">
       <div class="rhs_img">
-        <img src="~assets/images/option_image.jpg" alt="">
+        <img src="~assets/images/option_image-1.png" alt="">
       </div>
     </div>
   </div>
@@ -53,7 +33,11 @@ export default {
 }
 
 .lhs {
-  flex-basis: 45%;
+  flex-basis: 37%;
+}
+
+h1 {
+  font-weight: 900;
 }
 
 .sub_title {
@@ -89,13 +73,13 @@ export default {
 }
 
 .rhs {
-  flex-basis: 45%;
+  flex-basis: 60%;
   display: flex;
   justify-content: flex-end;
 }
 
 .rhs_img {
-  width: 80%;
+  width: 100%;
 }
 
 .rhs_img img {
