@@ -10,9 +10,6 @@
       </p>
       <button class="global_btn">
         <p>Sell Car</p>
-        <!-- <span class="material-icons-outlined">
-          chevron_right
-        </span> -->
       </button>
     </div>
     <div class="rhs">
@@ -63,7 +60,6 @@ h1 {
 }
 
 .global_btn {
-  display: flex;
   margin-top: 40px;
   background-color: white;
   color: var(--primary-color);
@@ -71,6 +67,7 @@ h1 {
 
 .global_btn p {
   color: var(--primary-color);
+  font-weight: 800;
 }
 
 .material-icons-outlined {

@@ -76,14 +76,13 @@ export default {
 }
 .footer_ctn {
   box-shadow: 0px 5px 20px #dadada;
-  border-radius: 30px 30px 0 0;
   background-color: #FFF9F4;
-  max-width: 1344px;
-  width: 80%;
-  margin: auto;
   padding: 6rem 6rem 2rem;
 }
 .footer_inner {
+  max-width: 1344px;
+  width: 80%;
+  margin: auto;
   /* padding-top: 4rem; */
   /* height: 120px; */
   display: flex;

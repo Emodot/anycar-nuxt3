@@ -6,15 +6,12 @@
           <p class="filter_title">Filter Result</p>
           <span class="material-icons-outlined tune_icon"> tune </span>
         </div>
-        <div class="filter_inner">
-          <p class="filter_name">Filter By</p>
-        </div>
         <hr class="size_line" />
         <div class="filter_inner_ctn">
           <div class="filter_inner" @click="toggleMakeTab()">
             <p class="filter_name">Make</p>
             <span class="material-icons-outlined arrow_right_icon">
-              chevron_right
+              expand_more
             </span>
           </div>
           <div v-if="openMakeTab" class="filter_input">
@@ -29,28 +26,10 @@
           <hr class="size_line" />
         </div>
         <div class="filter_inner_ctn">
-          <div class="filter_inner" @click="toggleYearTab()">
-            <p class="filter_name">Year</p>
-            <span class="material-icons-outlined arrow_right_icon">
-              chevron_right
-            </span>
-          </div>
-          <div v-if="openYearTab" class="filter_input">
-            <input v-model="yearFilter" type="text" />
-            <span
-              class="material-icons-outlined search_icon"
-              @click="filterYear()"
-            >
-              east
-            </span>
-          </div>
-          <hr class="size_line" />
-        </div>
-        <div class="filter_inner_ctn">
           <div class="filter_inner" @click="togglePriceTab()">
             <p class="filter_name">Price</p>
             <span class="material-icons-outlined arrow_right_icon">
-              chevron_right
+              expand_more
             </span>
           </div>
           <div v-if="openPriceTab" class="filter_input">
@@ -65,10 +44,28 @@
           <hr class="size_line" />
         </div>
         <div class="filter_inner_ctn">
+          <div class="filter_inner" @click="toggleYearTab()">
+            <p class="filter_name">Year</p>
+            <span class="material-icons-outlined arrow_right_icon">
+              expand_more
+            </span>
+          </div>
+          <div v-if="openYearTab" class="filter_input">
+            <input v-model="yearFilter" type="text" />
+            <span
+              class="material-icons-outlined search_icon"
+              @click="filterYear()"
+            >
+              east
+            </span>
+          </div>
+          <hr class="size_line" />
+        </div>
+        <div class="filter_inner_ctn">
           <div class="filter_inner" @click="toggleMileageTab()">
             <p class="filter_name">Mileage</p>
             <span class="material-icons-outlined arrow_right_icon">
-              chevron_right
+              expand_more
             </span>
           </div>
           <div v-if="openMileageTab" class="filter_input">
@@ -83,17 +80,71 @@
           <hr class="size_line" />
         </div>
         <div class="filter_inner_ctn">
-          <div class="filter_inner" @click="toggleTypeTab()">
-            <p class="filter_name">Type</p>
+          <div class="filter_inner" @click="toggleEngineTypeTab()">
+            <p class="filter_name">Engine Type</p>
             <span class="material-icons-outlined arrow_right_icon">
-              chevron_right
+              expand_more
             </span>
           </div>
-          <div v-if="openTypeTab" class="filter_input">
-            <input v-model="typeFilter" type="text" />
+          <div v-if="openEngineTypeTab" class="filter_input">
+            <input v-model="enginetypeFilter" type="text" />
             <span
               class="material-icons-outlined search_icon"
-              @click="filterType()"
+              @click="filterEngineType()"
+            >
+              east
+            </span>
+          </div>
+          <hr class="size_line" />
+        </div>
+        <div class="filter_inner_ctn">
+          <div class="filter_inner" @click="toggleTransmissionTypeTab()">
+            <p class="filter_name">Transmission Type</p>
+            <span class="material-icons-outlined arrow_right_icon">
+              expand_more
+            </span>
+          </div>
+          <div v-if="openTransmissionTypeTab" class="filter_input">
+            <input v-model="transmissiontypeFilter" type="text" />
+            <span
+              class="material-icons-outlined search_icon"
+              @click="filterTransmissionType()"
+            >
+              east
+            </span>
+          </div>
+          <hr class="size_line" />
+        </div>
+        <div class="filter_inner_ctn">
+          <div class="filter_inner" @click="toggleConditionTab()">
+            <p class="filter_name">Selling Condition</p>
+            <span class="material-icons-outlined arrow_right_icon">
+              expand_more
+            </span>
+          </div>
+          <div v-if="openConditionTab" class="filter_input">
+            <input v-model="conditionFilter" type="text" />
+            <span
+              class="material-icons-outlined search_icon"
+              @click="filterCondition()"
+            >
+              east
+            </span>
+          </div>
+          <hr class="size_line" />
+        </div>
+        <div class="filter_inner_ctn">
+          <div class="filter_inner" @click="toggleFuelTypeTab()">
+            <p class="filter_name">Fuel Type</p>
+            <span class="material-icons-outlined arrow_right_icon">
+              expand_more
+            </span>
+          </div>
+          <div v-if="openFuelTypeTab" class="filter_input">
+            <input v-model="fueltypeFilter" type="text" />
+            <span
+              class="material-icons-outlined search_icon"
+              @click="filterFuelType()"
             >
               east
             </span>
@@ -196,7 +247,10 @@ const props = defineProps({
 });
 
 const makeFilter = ref("");
-const typeFilter = ref("");
+const engineTypeFilter = ref("");
+const transmissionTypeFilter = ref("");
+const fuelTypeFilter = ref("");
+const conditionFilter = ref("");
 const yearFilter = ref("");
 const priceFilter = ref("");
 const mileageFilter = ref("");
@@ -204,7 +258,10 @@ const openMakeTab = ref(false);
 const openYearTab = ref(false);
 const openPriceTab = ref(false);
 const openMileageTab = ref(false);
-const openTypeTab = ref(false);
+const openEngineTypeTab = ref(false);
+const openTransmissionTypeTab = ref(false);
+const openFuelTypeTab = ref(false);
+const openConditionTab = ref(false);
 
 const toggleMakeTab = () => {
   openMakeTab.value = !openMakeTab.value;
@@ -218,8 +275,17 @@ const togglePriceTab = () => {
 const toggleMileageTab = () => {
   openMileageTab.value = !openMileageTab.value;
 };
-const toggleTypeTab = () => {
-  openTypeTab.value = !openTypeTab.value;
+const toggleEngineTypeTab = () => {
+  openEngineTypeTab.value = !openEngineTypeTab.value;
+};
+const toggleTransmissionTypeTab = () => {
+  openTransmissionTypeTab.value = !openTransmissionTypeTab.value;
+};
+const toggleFuelTypeTab = () => {
+  openFuelTypeTab.value = !openFuelTypeTab.value;
+};
+const toggleConditionTab = () => {
+  openConditionTab.value = !openConditionTab.value;
 };
 
 const change = (val) => {
@@ -254,13 +320,37 @@ const filterMileage = () => {
   console.log(data);
   emit("filterMileage", data);
 };
-const filterType = () => {
+const filterEngineType = () => {
   let data = "";
-  if (typeFilter.value !== "") {
-    data = parseInt(typeFilter.value);
+  if (engineTypeFilter.value !== "") {
+    data = parseInt(engineTypeFilter.value);
   }
   console.log(data);
-  emit("filterType", data);
+  emit("filterEngineType", data);
+};
+const filterTransmissionType = () => {
+  let data = "";
+  if (transmissionTypeFilter.value !== "") {
+    data = parseInt(transmissionTypeFilter.value);
+  }
+  console.log(data);
+  emit("filterTransmissionType", data);
+};
+const filterFuelType = () => {
+  let data = "";
+  if (fuelTypeFilter.value !== "") {
+    data = parseInt(fuelTypeFilter.value);
+  }
+  console.log(data);
+  emit("filterFuelType", data);
+};
+const filterCondition = () => {
+  let data = "";
+  if (conditionFilter.value !== "") {
+    data = parseInt(conditionFilter.value);
+  }
+  console.log(data);
+  emit("filterCondition", data);
 };
 </script>
 
@@ -276,9 +366,9 @@ const filterType = () => {
 .size_ctn {
   border-radius: 10px;
   border: 1px solid rgba(21, 10, 65, 0.1);
-  background-color: #f0f1f2;
+  background-color: #ffffff;
   /* border-radius: 20px; */
-  padding: 10px 30px;
+  padding: 6px 20px;
 }
 
 .top_side {

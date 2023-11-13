@@ -71,7 +71,7 @@ const productList = ref({});
 
 <style scoped>
 .navbar_ctn {
-  background-color: white;
+  background-color: #F2F4F7;
   /* box-shadow: 0px 5px 20px #dadada; */
   position: fixed;
   width: 100%;
