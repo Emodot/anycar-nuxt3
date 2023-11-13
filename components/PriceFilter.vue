@@ -1,164 +1,88 @@
 <template>
   <div class="box_ctn">
     <div class="inner">
-      <h2 class="head">
-        Do you have a budget?
-      </h2>
-      <p class="sub_head">
-        Search for any car with a price filter
-      </p>
-      <div class="range_slider">
-        <!-- <vue-slider
-          v-model="value"
-          v-bind="options"
-          :tooltip-formatter="formatter2"
-          :enable-cross="false"
-          :tooltip="'always'"
-          :tooltip-placement="['bottom', 'bottom']"
-        /> -->
-      </div>
+      <h2 class="head">Search for a car</h2>
+      <p class="sub_head">Search by make or model</p>
+      <SearchInput />
       <div class="bottom">
-        <div class="lhs">
-          <p class="lhs_text">
-            What kind of Car do you want to search for?
-          </p>
-          <div class="car_select">
-            <div class="car">
-              <img src="~assets/images/new_car.svg" alt="">
-              <div class="checkbox_ctn">
-                <input class="checkbox" type="checkbox" name="new">
-                <p>New</p>
-              </div>
-            </div>
-            <div class="car">
-              <img src="~assets/images/old_car.svg" alt="">
-              <div class="checkbox_ctn">
-                <input class="checkbox" type="checkbox" name="old">
-                <p>Old</p>
-              </div>
-            </div>
-            <div class="car">
-              <img src="" alt="">
-              <div class="checkbox_ctn">
-                <input class="checkbox" type="checkbox" name="all">
-                <p>All</p>
-              </div>
+          <p class="bottom_text">Search by price</p>
+          <div class="select_value_ctn">
+            <div v-for="(value, index) in filterValues" :key="index" class="select_value">
+              <p>{{ value }}</p>
             </div>
           </div>
-        </div>
-        <div class="rhs">
-          <p class="rhs_text">
-            Est. Average Price
-          </p>
-          <h2 class="price">
-            ₦12,450,000
-          </h2>
-          <button class="global_btn">
-            Search for Cars
-          </button>
-        </div>
       </div>
+      <button class="global_btn">Search</button>
     </div>
   </div>
 </template>
 
-<script>
-// import VueSlider from 'vue-slider-component'
-// import 'vue-slider-component/theme/antd.css'
-export default {
-  // components: {
-  //   VueSlider
-  // },
-  data () {
-    return {
-      value: [900000, 10000000],
-      options: {
-        min: 500000,
-        max: 30000000,
-        interval: 100000,
-        dotSize: 20,
-        height: 5
-        // tooltip: 'active'
-      },
-      formatter2: v => `₦${('' + v).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
-    }
-  }
-
-}
+<script setup>
+const filterValues = ref([
+  'Under 3M',
+  '3M - 6M',
+  '6M - 10M',
+  '10M - 15M',
+  'Above 15M',
+])
 </script>
 
 <style scoped>
 .box_ctn {
-  background-color: white;
+  background-color: #F2F4F7;
   border-radius: 20px;
-  box-shadow: 0px 5px 20px #dadada;
-  width: 60%;
-  margin: auto;
-  margin-top: -12rem;
+  /* box-shadow: 0px 5px 20px #dadada; */
+  width: 100%;
   max-width: 800px;
-  padding: 50px 0;
+  padding: 40px;
 }
 
 .head {
-  text-align: center;
+  font-size: 22px;
+  font-weight: 900;
 }
 
 .inner {
-  width: 80%;
+  width: 100%;
   margin: auto;
 }
 .sub_head {
-  color: #00000080;
-  text-align: center;
-  margin-top: 7px;
-}
-
-.range_slider {
-  width: 50%;
-  margin: 30px auto;
+  color: #000000;
+  /* text-align: center; */
+  margin: 7px 0 10px 0;
 }
 
 .bottom {
+  margin: 3rem 0 2rem 0;
+}
+
+.select_value_ctn {
   display: flex;
-  justify-content: space-between;
-  margin-top: 4rem;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
-.lhs {
-  flex-basis: 50%;
-}
-.rhs {
-  flex-basis: 15%;
-}
-
-.car_select {
-  margin-top: 30px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.car_select .car {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.checkbox {
-  width: unset;
-}
-
-.checkbox_ctn {
+.select_value {
+  background-color: white;
+  padding: 0 17px;
+  height: 50px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #150a411a;
 }
 
-.checkbox_ctn p {
-  margin-left: 10px;
+.select_value p {
+  font-weight: 700;
 }
 
-.price {
-  margin: 2px 0 10px;
-}
+  .global_btn {
+    width: 100%;
+    height: 55px;
+  }
 
 @media only screen and (max-width: 1300px) {
 }
@@ -203,7 +127,7 @@ export default {
   }
 
   .global_btn {
-    width: 80%;
+    width: 100%;
   }
 }
 </style>
