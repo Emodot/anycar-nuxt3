@@ -1,97 +1,122 @@
 <template>
-  <div class="details">
-    <div class="lhs">
-      <div class="main_image" :style="{ backgroundImage: `url(${mainImage})` }">
-        <!-- <img src="~assets/images/car-2.jpg" alt=""> -->
-      </div>
-      <div class="other_images">
+  <div>
+    <div class="details">
+      <div class="lhs">
         <div
-          v-for="image in props.data.images"
-          :key="image.index"
-          class="inner_images"
+          class="main_image"
+          :style="{ backgroundImage: `url(${mainImage})` }"
         >
+          <!-- <img src="~assets/images/car-2.jpg" alt=""> -->
+        </div>
+        <div class="other_images">
           <div
-            :style="{ backgroundImage: `url(${image.urls})` }"
-            @click="changeMainImg(image)"
-          />
-          <!-- <img src="~assets/images/car.jpg" alt=""> -->
+            v-for="image in props.data.images"
+            :key="image.index"
+            class="inner_images"
+          >
+            <div
+              :style="{ backgroundImage: `url(${image.urls})` }"
+              @click="changeMainImg(image)"
+            />
+            <!-- <img src="~assets/images/car.jpg" alt=""> -->
+          </div>
+        </div>
+      </div>
+      <div class="rhs">
+        <h2>{{ props.data.make }} {{ props.data.model }}</h2>
+        <div class="car_options">
+          <div class="option">
+            <p>{{ props.data.yearOfManufacture }}</p>
+          </div>
+          <div class="option">
+            <p>243 Miles</p>
+          </div>
+          <div class="option">
+            <p>{{ props.data.model }}</p>
+          </div>
+          <div class="option">
+            <p>{{ props.data.engineType }}</p>
+          </div>
+          <div class="option">
+            <p>New</p>
+          </div>
+        </div>
+        <div class="prices_btns_ctn">
+          <div class="prices_ctn">
+            <div>
+              <p class="price_title">One off Price</p>
+              <p class="price_text">
+                {{ functions.formatCurrency(props.data.askingPrice, "NGN") }}
+              </p>
+            </div>
+            <div>
+              <p class="price_title">Installment Payment</p>
+              <p class="price_text">
+                {{ functions.formatCurrency(props.data.askingPrice, "NGN") }}/MO
+              </p>
+            </div>
+          </div>
+          <div class="prices_btn">
+            <button class="global_btn_2">Compare Car</button>
+            <button class="global_btn" @click="$emit('requestInspection')">
+              Request Inspection
+            </button>
+          </div>
+        </div>
+        <div class="table_ctn">
+          <p class="table_title">Car Specifications</p>
+          <div class="table_inner">
+            <p class="table_name">Engine</p>
+            <p class="table_value">
+              {{ props.data.engineType ?? "--" }}
+            </p>
+          </div>
+          <div class="table_inner">
+            <p class="table_name">Transmission</p>
+            <p class="table_value">
+              {{ props.data.transmissionType ?? "--" }}
+            </p>
+          </div>
+          <div class="table_inner">
+            <p class="table_name">Fuel Type</p>
+            <p class="table_value">
+              {{ props.data.fuelType ?? "--" }}
+            </p>
+          </div>
+          <div class="table_inner">
+            <p class="table_name">Interior Color</p>
+            <p class="table_value">
+              {{ props.data.interiorColor ?? "--" }}
+            </p>
+          </div>
+          <div class="table_inner">
+            <p class="table_name">Exterior Color</p>
+            <p class="table_value">
+              {{ props.data.exteriorColor ?? "--" }}
+            </p>
+          </div>
+          <div class="table_inner">
+            <p class="table_name">VIN</p>
+            <p class="table_value">
+              {{ props.data.vin ?? "--" }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="rhs">
-      <h2>{{ props.data.make }} {{ props.data.model }}</h2>
-      <div class="car_options">
-        <div class="option">
-          <p>{{ props.data.yearOfManufacture }}</p>
-        </div>
-        <div class="option">
-          <p>243 Miles</p>
-        </div>
-        <div class="option">
-          <p>{{ props.data.model }}</p>
-        </div>
-        <div class="option">
-          <p>{{ props.data.engineType }}</p>
-        </div>
-        <div class="option">
-          <p>New</p>
-        </div>
+    <div class="section_ctn">
+      <p class="section_title">Condition Assessment</p>
+      <div class="section_box">
+        <div class="box_tabs_ctn"></div>
       </div>
-      <div class="prices_btns_ctn">
-        <div class="prices_ctn">
-          <div>
-            <p class="price_title">One off Price</p>
-            <p class="price_text">{{ functions.formatCurrency(props.data.askingPrice, "NGN") }}</p>
+    </div>
+    <div class="section_ctn">
+      <p class="section_title">Car Features</p>
+      <div class="section_box">
+        <div class="box_inner">
+          <div v-for="(data, index) in carFeatures" :key="index" class="box_item">
+            <p>{{ data }}</p>
           </div>
-          <div>
-            <p class="price_title">Installment Payment</p>
-            <p class="price_text">{{ functions.formatCurrency(props.data.askingPrice, "NGN") }}/MO</p>
-          </div>
-        </div>
-        <div class="prices_btn">
-          <button class="global_btn_2">Compare Car</button>
-          <button class="global_btn" @click="$emit('requestInspection')">
-            Request Inspection
-          </button>
-        </div>
-      </div>
-      <div class="table_ctn">
-        <p class="table_title">Car Specifications</p>
-        <div class="table_inner">
-          <p class="table_name">Engine</p>
-          <p class="table_value">
-            {{ props.data.engineType ?? '--' }}
-          </p>
-        </div>
-        <div class="table_inner">
-          <p class="table_name">Transmission</p>
-          <p class="table_value">
-            {{ props.data.transmissionType ?? '--' }}
-          </p>
-        </div>
-        <div class="table_inner">
-          <p class="table_name">Fuel Type</p>
-          <p class="table_value">
-            {{ props.data.fuelType ?? '--' }}
-          </p>
-        </div>
-        <div class="table_inner">
-          <p class="table_name">Interior Color</p>
-          <p class="table_value">
-            {{ props.data.interiorColor ?? '--' }}
-          </p>
-        </div>
-        <div class="table_inner">
-          <p class="table_name">Exterior Color</p>
-          <p class="table_value">
-            {{ props.data.exteriorColor ?? '--' }}
-          </p>
-        </div>
-        <div class="table_inner">
-          <p class="table_name">VIN</p>
-          <p class="table_value">
-            {{ props.data.vin ?? '--' }}
-          </p>
         </div>
       </div>
     </div>
@@ -107,6 +132,48 @@ const props = defineProps({
 });
 
 const mainImage = ref("");
+const carFeatures = ref([
+  'Anti-lock Braking System',
+  'Reverse Camera',
+  'Parking Sensor',
+  'Navigation System',
+  'Bluetooth HandsFree',
+  'DVD system',
+  'Car Tracker',
+  'CoolBox',
+  'Remote Entry',
+  'Remote Start',
+  'Heated Seat',
+  'Adaptive Headlamps',
+  'Auto-Dimming Mirrors',
+  'Heated Arm Rests',
+  'Blind Spot Aleart',
+  'Navigation System',
+  'Heated Seat',
+  'Adaptive Headlamps',
+  'Auto-Dimming Mirrors',
+  'Heated Arm Rests',
+  'Navigation System',
+  'Bluetooth HandsFree',
+  'DVD system',
+  'Car Tracker',
+  'CoolBox',
+  'Remote Entry',
+  'Heated Seat',
+  'Adaptive Headlamps',
+  'Auto-Dimming Mirrors',
+  'Heated Arm Rests',
+  'Blind Spot Aleart',
+  'Reverse Camera',
+  'Parking Sensor',
+  'Navigation System',
+  'Bluetooth HandsFree',
+  'DVD system',
+  'Heated Arm Rests',
+  'Blind Spot Aleart',
+  'Navigation System',
+  'Parking Sensor',
+]);
 
 const createdData = () => {
   mainImage.value = props.data.images[0].urls;
@@ -267,12 +334,36 @@ h2 {
   padding: 13px 18px;
 }
 
+.section_ctn {
+  margin: 90px 0;
+}
 
-/* .compare_btn {
-  border: 1px solid var(--primary-color);
-  background-color: #fff;
+.section_title {
+  font-weight: 700;
+  font-size: 18px;
   color: var(--primary-color);
-} */
+  margin-bottom: 20px;
+}
+
+.section_box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.box_inner {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box_item {
+  padding: 12px 16px;
+  background-color: #F2F4F7;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
 @media only screen and (max-width: 1300px) {
 }
 
