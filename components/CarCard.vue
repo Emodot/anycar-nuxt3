@@ -66,35 +66,23 @@ const props = defineProps({
 
 const { cardDetails, imgHeight } = props;
 
-// console.log('CarCards', props.cardDetails);
+const route = useRoute();
+const router = useRoute();
+const getRoute = () => {
+  console.log(route);
+}
 
-// watch(
-//   () => props.cardDetails, (first, second) => {
-//   console.log('Card Watch Props: ', first, second);
-//   props.cardDetails = first
-//   }
-// );
+const selectProduct = (card) => {
+  if (route.name === 'compare-cars-select-car') {
+    navigateTo('/compare-cars-select-car')
+  } else {
+    navigateTo(`/buy-car/${card._id}`)
+  }
+};
+
+getRoute();
+
 // export default {
-//   props: {
-//     cardDetails: {
-//       type: Array,
-//       default: () => []
-//     },
-//     imgHeight: {
-//       type: Number,
-//       default: () => 14
-//     }
-//   },
-//   data () {
-//     return {
-//       firstCarId: '',
-//       currency: functions.formatCurrency,
-//       capitalizeFirstLetter: functions.capitalizeFirstLetter
-//     }
-//   },
-//   created () {
-//     console.log(this.$route)
-//   },
 //   methods: {
 //     selectProduct (card) {
 //       if (this.$route.name === 'compare-cars-select-car') {

@@ -5,26 +5,33 @@
         <!-- <img src="~assets/images/car-2.jpg" alt=""> -->
       </div>
       <div class="other_images">
-        <div v-for="image in data.images" :key="image.index" class="inner_images">
-          <div :style="{ backgroundImage: `url(${image.urls})` }" @click="changeMainImg(image)" />
+        <div
+          v-for="image in props.data.images"
+          :key="image.index"
+          class="inner_images"
+        >
+          <div
+            :style="{ backgroundImage: `url(${image.urls})` }"
+            @click="changeMainImg(image)"
+          />
           <!-- <img src="~assets/images/car.jpg" alt=""> -->
         </div>
       </div>
     </div>
     <div class="rhs">
-      <h2>{{ data.make }} {{ data.model }}</h2>
+      <h2>{{ props.data.make }} {{ props.data.model }}</h2>
       <div class="car_options">
         <div class="option">
-          <p>{{ data.yearOfManufacture }}</p>
+          <p>{{ props.data.yearOfManufacture }}</p>
         </div>
         <div class="option">
           <p>243 Miles</p>
         </div>
         <div class="option">
-          <p>{{ data.model }}</p>
+          <p>{{ props.data.model }}</p>
         </div>
         <div class="option">
-          <p>{{ data.engineType }}</p>
+          <p>{{ props.data.engineType }}</p>
         </div>
         <div class="option">
           <p>New</p>
@@ -32,57 +39,43 @@
       </div>
       <div class="table_ctn">
         <div class="table_inner">
-          <p class="table_name">
-            Engine
-          </p>
+          <p class="table_name">Engine</p>
           <p class="table_value">
-            {{ data.engineType }}
+            {{ props.data.engineType }}
           </p>
         </div>
         <div class="table_inner">
-          <p class="table_name">
-            Transmission
-          </p>
+          <p class="table_name">Transmission</p>
           <p class="table_value">
-            {{ data.transmissionType }}
+            {{ props.data.transmissionType }}
           </p>
         </div>
         <div class="table_inner">
-          <p class="table_name">
-            Interior Color
-          </p>
+          <p class="table_name">Interior Color</p>
           <p class="table_value">
-            {{ data.interiorColor }}
+            {{ props.data.interiorColor }}
           </p>
         </div>
         <div class="table_inner">
-          <p class="table_name">
-            Exterior Color
-          </p>
+          <p class="table_name">Exterior Color</p>
           <p class="table_value">
-            {{ data.exteriorColor }}
+            {{ props.data.exteriorColor }}
           </p>
         </div>
         <div class="table_inner">
-          <p class="table_name">
-            VIN
-          </p>
+          <p class="table_name">VIN</p>
           <p class="table_value">
-            {{ data.vin }}
+            {{ props.data.vin }}
           </p>
         </div>
         <div class="table_inner">
-          <p class="table_name">
-            Asking Price
-          </p>
+          <p class="table_name">Asking Price</p>
           <p class="table_value">
-            {{ currency(data.askingPrice, 'NGN') }}
+            {{ functions.formatCurrency(props.data.askingPrice, "NGN") }}
           </p>
         </div>
         <div class="table_btn">
-          <button class="global_btn_2">
-            Compare Car
-          </button>
+          <button class="global_btn_2">Compare Car</button>
           <button class="global_btn" @click="$emit('requestInspection')">
             Request Inspection
           </button>
@@ -92,30 +85,24 @@
   </div>
 </template>
 
-<script>
-import functions from '@/utils/functions'
-export default {
-  props: {
-    data: {
-      type: Object,
-      default: () => {}
-    }
+<script setup>
+const props = defineProps({
+  data: {
+    type: Object,
+    default: () => {},
   },
-  data () {
-    return {
-      currency: functions.formatCurrency,
-      mainImage: ''
-    }
-  },
-  created () {
-    this.mainImage = this.data.images[0].urls
-  },
-  methods: {
-    changeMainImg (val) {
-      this.mainImage = val.urls
-    }
-  }
-}
+});
+
+const mainImage = ref("");
+
+const createdData = () => {
+  mainImage.value = props.data.images[0].urls;
+};
+const changeMainImg = (val) => {
+  mainImage.value = val.urls;
+};
+
+createdData();
 </script>
 
 <style scoped>
@@ -178,7 +165,7 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 12px 16px;
-  background-color: #EEF2F4;
+  background-color: #eef2f4;
   border-radius: 4px;
   margin-right: 15px;
   margin-top: 10px;
