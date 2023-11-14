@@ -26,19 +26,23 @@
         <h2>{{ props.data.make }} {{ props.data.model }}</h2>
         <div class="car_options">
           <div class="option">
-            <p>{{ props.data.yearOfManufacture }}</p>
+            <p>{{ props.data.yearOfManufacture ?? "--" }}</p>
           </div>
           <div class="option">
-            <p>243 Miles</p>
+            <p>{{ props.data.miles ?? "-- Miles" }}</p>
           </div>
           <div class="option">
-            <p>{{ props.data.model }}</p>
+            <p>{{ props.data.model ?? "--" }}</p>
           </div>
           <div class="option">
-            <p>{{ props.data.engineType }}</p>
+            <p>{{ props.data.engineType ?? "--" }}</p>
           </div>
           <div class="option">
-            <p>New</p>
+            <p>
+              {{
+                functions.capitalizeFirstLetter(props.data.condition) ?? "--"
+              }}
+            </p>
           </div>
         </div>
         <div class="prices_btns_ctn">
@@ -57,9 +61,9 @@
             </div>
           </div>
           <div class="prices_btn">
-            <button class="global_btn_2">Compare Car</button>
+            <button class="global_btn_2">Pay cash</button>
             <button class="global_btn" @click="$emit('requestInspection')">
-              Request Inspection
+              Apply for Loan
             </button>
           </div>
         </div>
@@ -107,14 +111,33 @@
     <div class="section_ctn">
       <p class="section_title">Condition Assessment</p>
       <div class="section_box">
-        <div class="box_tabs_ctn"></div>
+        <div class="box_tabs">
+          <div
+            v-for="(tab, index) in assessmentsTabs"
+            :key="index"
+            class="box_tab_item"
+            :class="assessmentActiveTab === tab.name ? 'active_box_tab' : ''"
+            @click="assessmentActiveTab = tab.name"
+          >
+            <p>{{ tab.name }}</p>
+            <span v-if="tab.caution === 0" class="material-icons-outlined"> check_circle </span>
+            <div v-else class="caution_ctn">
+              <p>{{ tab.caution }}</p>
+            </div>
+          </div>
+        </div>
+        <hr class="tab_line" />
       </div>
     </div>
     <div class="section_ctn">
       <p class="section_title">Car Features</p>
       <div class="section_box">
         <div class="box_inner">
-          <div v-for="(data, index) in carFeatures" :key="index" class="box_item">
+          <div
+            v-for="(data, index) in carFeatures"
+            :key="index"
+            class="box_item"
+          >
             <p>{{ data }}</p>
           </div>
         </div>
@@ -132,47 +155,83 @@ const props = defineProps({
 });
 
 const mainImage = ref("");
+
+const assessmentActiveTab = ref("Engine");
+const assessmentsTabs = ref([
+  {
+    name: "Engine",
+    caution: 0,
+  },
+  {
+    name: "Electricals",
+    caution: 0,
+  },
+  {
+    name: "Transmission & Clutch",
+    caution: 2,
+  },
+  {
+    name: "Suspension & Steering",
+    caution: 0,
+  },
+  {
+    name: "Test Drive",
+    caution: 0,
+  },
+  {
+    name: "Exterior",
+    caution: 0,
+  },
+  {
+    name: "Interior",
+    caution: 0,
+  },
+  {
+    name: "Air conditioning System",
+    caution: 0,
+  },
+]);
 const carFeatures = ref([
-  'Anti-lock Braking System',
-  'Reverse Camera',
-  'Parking Sensor',
-  'Navigation System',
-  'Bluetooth HandsFree',
-  'DVD system',
-  'Car Tracker',
-  'CoolBox',
-  'Remote Entry',
-  'Remote Start',
-  'Heated Seat',
-  'Adaptive Headlamps',
-  'Auto-Dimming Mirrors',
-  'Heated Arm Rests',
-  'Blind Spot Aleart',
-  'Navigation System',
-  'Heated Seat',
-  'Adaptive Headlamps',
-  'Auto-Dimming Mirrors',
-  'Heated Arm Rests',
-  'Navigation System',
-  'Bluetooth HandsFree',
-  'DVD system',
-  'Car Tracker',
-  'CoolBox',
-  'Remote Entry',
-  'Heated Seat',
-  'Adaptive Headlamps',
-  'Auto-Dimming Mirrors',
-  'Heated Arm Rests',
-  'Blind Spot Aleart',
-  'Reverse Camera',
-  'Parking Sensor',
-  'Navigation System',
-  'Bluetooth HandsFree',
-  'DVD system',
-  'Heated Arm Rests',
-  'Blind Spot Aleart',
-  'Navigation System',
-  'Parking Sensor',
+  "Anti-lock Braking System",
+  "Reverse Camera",
+  "Parking Sensor",
+  "Navigation System",
+  "Bluetooth HandsFree",
+  "DVD system",
+  "Car Tracker",
+  "CoolBox",
+  "Remote Entry",
+  "Remote Start",
+  "Heated Seat",
+  "Adaptive Headlamps",
+  "Auto-Dimming Mirrors",
+  "Heated Arm Rests",
+  "Blind Spot Aleart",
+  "Navigation System",
+  "Heated Seat",
+  "Adaptive Headlamps",
+  "Auto-Dimming Mirrors",
+  "Heated Arm Rests",
+  "Navigation System",
+  "Bluetooth HandsFree",
+  "DVD system",
+  "Car Tracker",
+  "CoolBox",
+  "Remote Entry",
+  "Heated Seat",
+  "Adaptive Headlamps",
+  "Auto-Dimming Mirrors",
+  "Heated Arm Rests",
+  "Blind Spot Aleart",
+  "Reverse Camera",
+  "Parking Sensor",
+  "Navigation System",
+  "Bluetooth HandsFree",
+  "DVD system",
+  "Heated Arm Rests",
+  "Blind Spot Aleart",
+  "Navigation System",
+  "Parking Sensor",
 ]);
 
 const createdData = () => {
@@ -348,7 +407,7 @@ h2 {
 .section_box {
   background-color: white;
   border-radius: 10px;
-  padding: 30px;
+  padding: 40px;
 }
 
 .box_inner {
@@ -358,10 +417,69 @@ h2 {
 
 .box_item {
   padding: 12px 16px;
-  background-color: #F2F4F7;
+  background-color: #f2f4f7;
   margin-right: 10px;
   margin-bottom: 10px;
   border-radius: 4px;
+}
+
+.box_tabs {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab_line {
+  border: none;
+  border-top: 2px solid #150a411a;
+}
+
+.box_tab_item {
+  cursor: pointer;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.material-icons-outlined {
+  font-size: 18px;
+  color: #3AA880;
+  margin-left: 7px;
+}
+
+
+.box_tab_item p {
+  font-size: 14px;
+  /* font-weight: 700; */
+  color: #4d4a5780;
+  /* text-align: center; */
+}
+
+.active_box_tab {
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.active_box_tab p {
+  color: var(--primary-color);
+}
+
+
+.caution_ctn {
+  margin-left: 7px;
+  width: 18px;
+  height: 18px;
+  background-color: #FF0000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.caution_ctn p {
+  font-size: 12px;
+  color: white;
+  font-weight: 700;
 }
 
 @media only screen and (max-width: 1300px) {
