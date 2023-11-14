@@ -7,32 +7,33 @@
           <span class="material-icons-outlined tune_icon"> tune </span>
         </div>
         <hr class="size_line" />
-        <div class="filter_inner">
-          <p class="filter_name">Applied Filter</p>
-          <p class="clear_filter">
-            Clear all Flter
-            <span class="material-icons-outlined cancel_icon"> cancel </span>
-          </p>
-        </div>
-        <hr class="size_line" />
-        <!-- <div class="filter_inner_ctn">
-          <div class="filter_inner" @click="toggleMakeTab()">
-            <p class="filter_name">Make</p>
-            <span class="material-icons-outlined arrow_right_icon">
-              expand_more
-            </span>
+        <div v-if="selectedFilters.length" class="filter_inner_ctn">
+          <div class="filter_inner">
+            <p class="filter_name">Applied Filter</p>
+            <p class="clear_filter" @click="clearSelected()">
+              Clear all Flter
+              <span class="material-icons-outlined cancel_icon"> cancel </span>
+            </p>
           </div>
-          <div v-if="openMakeTab" class="filter_ctn_item">
-            <input v-model="makeFilter" type="text" />
-            <span
-              class="material-icons-outlined search_icon"
-              @click="filterMake()"
+          <div class="select_value_ctn">
+            <div
+              v-for="(value, index) in selectedFilters"
+              :key="index"
+              class="select_value"
             >
-              east
-            </span>
+              <p class="selcted_item_text">
+                {{ value }}
+                <span
+                  class="material-icons-outlined cancel_icon"
+                  @click="removeSelected(value)"
+                >
+                  cancel
+                </span>
+              </p>
+            </div>
           </div>
           <hr class="size_line" />
-        </div> -->
+        </div>
         <div class="filter_inner_ctn">
           <div class="filter_inner" @click="togglePriceTab()">
             <p class="filter_name">Price</p>
@@ -58,7 +59,10 @@
                   v-for="(value, index) in priceOutrightValues"
                   :key="index"
                   class="select_value"
-                  @click="priceFilter = value"
+                  @click="
+                    priceFilter = value;
+                    addSelected(value);
+                  "
                 >
                   <p>{{ value }}</p>
                 </div>
@@ -70,7 +74,10 @@
                   v-for="(value, index) in priceMonthlyValues"
                   :key="index"
                   class="select_value"
-                  @click="priceFilter = value"
+                  @click="
+                    priceFilter = value;
+                    addSelected(value);
+                  "
                 >
                   <p>{{ value }}</p>
                 </div>
@@ -322,8 +329,8 @@ const priceFilterTabs = ref(["Outright Purchase", "Monthly Purchase"]);
 
 const priceMonthlyValues = ref([
   "Under N200,000/Mo",
-  'N200,000 - N500,000/Mo',
-  'Above N500,000',
+  "N200,000 - N500,000/Mo",
+  "Above N500,000",
 ]);
 const priceOutrightValues = ref([
   "Under 3M",
@@ -357,7 +364,7 @@ const fuelTypeValues = ref(["Petrol", "Diesel", "Electric", "Hybrid"]);
 const makeFilter = ref("");
 const engineTypeFilter = ref("");
 const T = ref("");
-const fuelTypeFilteT = ref("");
+const fuelTypeFilter = ref("");
 const conditionFilter = ref("");
 const yearFilter = ref("");
 const priceFilter = ref("");
@@ -370,6 +377,18 @@ const openEngineTypeTab = ref(false);
 const openTransmissionTypeTab = ref(false);
 const openFuelTypeTab = ref(false);
 const openConditionTab = ref(false);
+
+const addSelected = (data) => {
+  selectedFilters.value.push(data);
+  console.log(selectedFilters.value);
+};
+const removeSelected = (data) => {
+  const index = selectedFilters.value.indexOf(data);
+  selectedFilters.value.splice(index, 1);
+};
+const clearSelected = () => {
+  selectedFilters.value = [];
+};
 
 const toggleMakeTab = () => {
   openMakeTab.value = !openMakeTab.value;
@@ -550,6 +569,7 @@ const filterCondition = () => {
   margin-bottom: 10px;
   border-radius: 6px;
   border: 1px solid #150a411a;
+  cursor: pointer;
 }
 
 .select_value p {
@@ -559,6 +579,12 @@ const filterCondition = () => {
 .clear_filter {
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+
+.selcted_item_text {
+  display: flex;
+  /* align-items: center; */
 }
 
 .cancel_icon {

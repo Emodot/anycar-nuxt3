@@ -1,116 +1,35 @@
 <template>
   <div class="products_ctn">
-    <div class="top_section">
-      <div>
-        <h2 class="title">
-          Other Cars you may like
-        </h2>
-        <p class="sub_title">
-          Check the varieties of cars recently updated on our lots
-        </p>
-      </div>
-      <!-- <div class="tab_section">
-        <button class="global_btn">
-          Search for Cars
-        </button>
-      </div> -->
+    <!-- <div class="top_section">
+    </div> -->
+    <h2 class="title">Other Cars you may like</h2>
+    <div v-if="!props.loading" class="product_list_ctn">
+      <CarCard :card-details="props.data" />
     </div>
-    <div class="product_list_ctn">
-      <CarCard :card-details="data" />
+    <div v-else class="page_loader_ctn">
+      <PageLoader />
     </div>
     <div class="bottom_text">
       <p>
-        Didn’t find what you were looking for? <span class="bottom_link">See more</span>
+        Didn’t find what you were looking for?
+        <span class="bottom_link">See more</span>
       </p>
-      <span class="material-icons-outlined">
-        arrow_forward
-      </span>
+      <span class="material-icons-outlined"> arrow_forward </span>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    data: {
-      type: Array,
-      default: () => []
-    }
+<script setup>
+const props = defineProps({
+  data: {
+    type: Array,
+    required: true,
   },
-  data () {
-    return {
-      cars: [
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        },
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        },
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        },
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        },
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        },
-        {
-          name: 'Ford Explore Limited SUV',
-          price: '13,000,000',
-          year: '2018',
-          image: require('assets/images/car.jpg'),
-          miles: '475 Miles',
-          cylinder: '4-Cylinder Turbo',
-          type: 'AWD',
-          condition: 'New',
-          value: 1
-        }
-      ]
-    }
-  }
-
-}
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>
 
 <style scoped>
@@ -127,7 +46,9 @@ export default {
 }
 
 .title {
-  margin-bottom: 5px;
+  text-align: center;
+  font-size: 22px;
+  /* margin-bottom: 5px; */
 }
 
 .line {
@@ -197,5 +118,4 @@ export default {
     margin-bottom: 30px;
   }
 }
-
 </style>

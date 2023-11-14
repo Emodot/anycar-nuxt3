@@ -119,6 +119,7 @@ h1 {
 .global_btn {
 	background-color: var(--primary-color);
 	color: white;
+	border: 1px solid var(--primary-color);
 	padding: 15px 20px;
 	border-radius: 10px;
 	min-width: 8rem;
