@@ -7,14 +7,22 @@
           <span class="material-icons-outlined tune_icon"> tune </span>
         </div>
         <hr class="size_line" />
-        <div class="filter_inner_ctn">
+        <div class="filter_inner">
+          <p class="filter_name">Applied Filter</p>
+          <p class="clear_filter">
+            Clear all Flter
+            <span class="material-icons-outlined cancel_icon"> cancel </span>
+          </p>
+        </div>
+        <hr class="size_line" />
+        <!-- <div class="filter_inner_ctn">
           <div class="filter_inner" @click="toggleMakeTab()">
             <p class="filter_name">Make</p>
             <span class="material-icons-outlined arrow_right_icon">
               expand_more
             </span>
           </div>
-          <div v-if="openMakeTab" class="filter_input">
+          <div v-if="openMakeTab" class="filter_ctn_item">
             <input v-model="makeFilter" type="text" />
             <span
               class="material-icons-outlined search_icon"
@@ -24,7 +32,7 @@
             </span>
           </div>
           <hr class="size_line" />
-        </div>
+        </div> -->
         <div class="filter_inner_ctn">
           <div class="filter_inner" @click="togglePriceTab()">
             <p class="filter_name">Price</p>
@@ -32,14 +40,43 @@
               expand_more
             </span>
           </div>
-          <div v-if="openPriceTab" class="filter_input">
-            <input v-model="priceFilter" type="text" />
-            <span
-              class="material-icons-outlined search_icon"
-              @click="filterPrice()"
-            >
-              east
-            </span>
+          <div v-if="openPriceTab" class="filter_ctn_item">
+            <div class="price_filter_tabs">
+              <div
+                v-for="(tab, index) in priceFilterTabs"
+                :key="index"
+                class="price_filter_tab_item"
+                :class="priceFilterActiveTab === tab ? 'active_price_tab' : ''"
+                @click="priceFilterActiveTab = tab"
+              >
+                <p>{{ tab }}</p>
+              </div>
+            </div>
+            <div v-if="priceFilterActiveTab === 'Outright Purchase'">
+              <div class="select_value_ctn">
+                <div
+                  v-for="(value, index) in priceOutrightValues"
+                  :key="index"
+                  class="select_value"
+                  @click="priceFilter = value"
+                >
+                  <p>{{ value }}</p>
+                </div>
+              </div>
+            </div>
+            <div v-if="priceFilterActiveTab === 'Monthly Purchase'">
+              <div class="select_value_ctn">
+                <div
+                  v-for="(value, index) in priceMonthlyValues"
+                  :key="index"
+                  class="select_value"
+                  @click="priceFilter = value"
+                >
+                  <p>{{ value }}</p>
+                </div>
+              </div>
+            </div>
+            <!-- <input v-model="priceFilter" type="text" /> -->
           </div>
           <hr class="size_line" />
         </div>
@@ -50,14 +87,17 @@
               expand_more
             </span>
           </div>
-          <div v-if="openYearTab" class="filter_input">
-            <input v-model="yearFilter" type="text" />
-            <span
-              class="material-icons-outlined search_icon"
-              @click="filterYear()"
-            >
-              east
-            </span>
+          <div v-if="openYearTab" class="filter_ctn_item">
+            <div class="select_value_ctn">
+              <div
+                v-for="(value, index) in yearValues"
+                :key="index"
+                class="select_value"
+                @click="yearFilter = value"
+              >
+                <p>{{ value }}</p>
+              </div>
+            </div>
           </div>
           <hr class="size_line" />
         </div>
@@ -68,14 +108,24 @@
               expand_more
             </span>
           </div>
-          <div v-if="openMileageTab" class="filter_input">
-            <input v-model="mileageFilter" type="text" />
+          <div v-if="openMileageTab" class="filter_ctn_item">
+            <div class="select_value_ctn">
+              <div
+                v-for="(value, index) in mileageValues"
+                :key="index"
+                class="select_value"
+                @click="mileageFilter = value"
+              >
+                <p>{{ value }}</p>
+              </div>
+            </div>
+            <!-- <input v-model="mileageFilter" type="text" />
             <span
               class="material-icons-outlined search_icon"
               @click="filterMileage()"
             >
               east
-            </span>
+            </span> -->
           </div>
           <hr class="size_line" />
         </div>
@@ -86,14 +136,17 @@
               expand_more
             </span>
           </div>
-          <div v-if="openEngineTypeTab" class="filter_input">
-            <input v-model="enginetypeFilter" type="text" />
-            <span
-              class="material-icons-outlined search_icon"
-              @click="filterEngineType()"
-            >
-              east
-            </span>
+          <div v-if="openEngineTypeTab" class="filter_ctn_item">
+            <div class="select_value_ctn">
+              <div
+                v-for="(value, index) in engineTypeValues"
+                :key="index"
+                class="select_value"
+                @click="enginetypeFilter = value"
+              >
+                <p>{{ value }}</p>
+              </div>
+            </div>
           </div>
           <hr class="size_line" />
         </div>
@@ -104,14 +157,17 @@
               expand_more
             </span>
           </div>
-          <div v-if="openTransmissionTypeTab" class="filter_input">
-            <input v-model="transmissiontypeFilter" type="text" />
-            <span
-              class="material-icons-outlined search_icon"
-              @click="filterTransmissionType()"
-            >
-              east
-            </span>
+          <div v-if="openTransmissionTypeTab" class="filter_ctn_item">
+            <div class="select_value_ctn">
+              <div
+                v-for="(value, index) in transmissionTypeValues"
+                :key="index"
+                class="select_value"
+                @click="transmissionTypeFilter = value"
+              >
+                <p>{{ value }}</p>
+              </div>
+            </div>
           </div>
           <hr class="size_line" />
         </div>
@@ -122,14 +178,17 @@
               expand_more
             </span>
           </div>
-          <div v-if="openConditionTab" class="filter_input">
-            <input v-model="conditionFilter" type="text" />
-            <span
-              class="material-icons-outlined search_icon"
-              @click="filterCondition()"
-            >
-              east
-            </span>
+          <div v-if="openConditionTab" class="filter_ctn_item">
+            <div class="select_value_ctn">
+              <div
+                v-for="(value, index) in conditionValues"
+                :key="index"
+                class="select_value"
+                @click="conditionFilter = value"
+              >
+                <p>{{ value }}</p>
+              </div>
+            </div>
           </div>
           <hr class="size_line" />
         </div>
@@ -140,16 +199,19 @@
               expand_more
             </span>
           </div>
-          <div v-if="openFuelTypeTab" class="filter_input">
-            <input v-model="fueltypeFilter" type="text" />
-            <span
-              class="material-icons-outlined search_icon"
-              @click="filterFuelType()"
-            >
-              east
-            </span>
+          <div v-if="openFuelTypeTab" class="filter_ctn_item">
+            <div class="select_value_ctn">
+              <div
+                v-for="(value, index) in fuelTypeValues"
+                :key="index"
+                class="select_value"
+                @click="fuelTypeFilter = value"
+              >
+                <p>{{ value }}</p>
+              </div>
+            </div>
           </div>
-          <hr class="size_line" />
+          <!-- <hr class="size_line" /> -->
         </div>
       </div>
     </div>
@@ -158,7 +220,7 @@
         <CarCard
           v-if="props.data?.docs?.length"
           :card-details="data?.docs"
-          :img-height="11"
+          :img-height="16"
         />
         <div v-else class="empty_state_ctn">
           <div>
@@ -234,7 +296,14 @@
 </template>
 
 <script setup>
-const emit = defineEmits(['changePage', 'filterMake', 'filterYear', 'filterPrice', 'filterMileage', 'filterType']);
+const emit = defineEmits([
+  "changePage",
+  "filterMake",
+  "filterYear",
+  "filterPrice",
+  "filterMileage",
+  "filterType",
+]);
 const props = defineProps({
   data: {
     type: Object,
@@ -246,10 +315,49 @@ const props = defineProps({
   },
 });
 
+const selectedFilters = ref([]);
+
+const priceFilterActiveTab = ref("Outright Purchase");
+const priceFilterTabs = ref(["Outright Purchase", "Monthly Purchase"]);
+
+const priceMonthlyValues = ref([
+  "Under N200,000/Mo",
+  'N200,000 - N500,000/Mo',
+  'Above N500,000',
+]);
+const priceOutrightValues = ref([
+  "Under 3M",
+  "3M - 6M",
+  "6M - 10M",
+  "10M - 15M",
+  "Above 15M",
+]);
+const yearValues = ref([
+  "2019 - 2023",
+  "2014 - 2018",
+  "2009 - 2013",
+  "2004 - 2008",
+  "Below 2004",
+]);
+const mileageValues = ref([
+  "0KM - 30,000KM",
+  "30,000KM - 60,000KM",
+  "Above 150,000KM",
+]);
+const engineTypeValues = ref([
+  "4 - Cylinder",
+  "6 - Cylinder",
+  "8 - Cylinder",
+  "10 - Cylinder",
+  "12- Cylinder",
+]);
+const transmissionTypeValues = ref(["Manual", "Automatic", "Duplex"]);
+const conditionValues = ref(["Brand New", "Foreign Used", "Nigerian Used"]);
+const fuelTypeValues = ref(["Petrol", "Diesel", "Electric", "Hybrid"]);
 const makeFilter = ref("");
 const engineTypeFilter = ref("");
-const transmissionTypeFilter = ref("");
-const fuelTypeFilter = ref("");
+const T = ref("");
+const fuelTypeFilteT = ref("");
 const conditionFilter = ref("");
 const yearFilter = ref("");
 const priceFilter = ref("");
@@ -361,7 +469,7 @@ const filterCondition = () => {
 }
 
 .lhs {
-  flex-basis: 20%;
+  flex-basis: 22%;
 }
 .size_ctn {
   border-radius: 10px;
@@ -406,7 +514,7 @@ const filterCondition = () => {
 .filter_name {
   color: var(--primary-color);
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .arrow_right_icon {
@@ -414,6 +522,7 @@ const filterCondition = () => {
   font-size: 22px;
   font-weight: 100;
 }
+
 .size_value {
   font-size: 12px;
   font-weight: 600;
@@ -424,8 +533,69 @@ const filterCondition = () => {
   border-top: 1px solid #150a4133;
 }
 
+.select_value_ctn {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.select_value {
+  background-color: white;
+  padding: 0 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #150a411a;
+}
+
+.select_value p {
+  font-weight: 500;
+}
+
+.clear_filter {
+  display: flex;
+  align-items: center;
+}
+
+.cancel_icon {
+  font-size: 16px;
+  margin-left: 9px;
+}
+
+.price_filter_tabs {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.price_filter_tab_item {
+  flex-basis: 45%;
+  cursor: pointer;
+  padding-bottom: 10px;
+}
+
+.price_filter_tab_item p {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4d4a5780;
+  text-align: center;
+}
+
+.active_price_tab {
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.active_price_tab p {
+  color: var(--primary-color);
+}
+
 .rhs {
-  flex-basis: 75%;
+  flex-basis: 76%;
 }
 
 input {
@@ -433,13 +603,8 @@ input {
   height: 40px;
 }
 
-.filter_input {
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  margin-bottom: 5px;
+.filter_ctn_item {
+  margin-bottom: 15px;
 }
 
 .search_icon {
