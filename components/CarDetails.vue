@@ -37,48 +37,61 @@
           <p>New</p>
         </div>
       </div>
+      <div class="prices_btns_ctn">
+        <div class="prices_ctn">
+          <div>
+            <p class="price_title">One off Price</p>
+            <p class="price_text">{{ functions.formatCurrency(props.data.askingPrice, "NGN") }}</p>
+          </div>
+          <div>
+            <p class="price_title">Installment Payment</p>
+            <p class="price_text">{{ functions.formatCurrency(props.data.askingPrice, "NGN") }}/MO</p>
+          </div>
+        </div>
+        <div class="prices_btn">
+          <button class="global_btn_2">Compare Car</button>
+          <button class="global_btn" @click="$emit('requestInspection')">
+            Request Inspection
+          </button>
+        </div>
+      </div>
       <div class="table_ctn">
+        <p class="table_title">Car Specifications</p>
         <div class="table_inner">
           <p class="table_name">Engine</p>
           <p class="table_value">
-            {{ props.data.engineType }}
+            {{ props.data.engineType ?? '--' }}
           </p>
         </div>
         <div class="table_inner">
           <p class="table_name">Transmission</p>
           <p class="table_value">
-            {{ props.data.transmissionType }}
+            {{ props.data.transmissionType ?? '--' }}
+          </p>
+        </div>
+        <div class="table_inner">
+          <p class="table_name">Fuel Type</p>
+          <p class="table_value">
+            {{ props.data.fuelType ?? '--' }}
           </p>
         </div>
         <div class="table_inner">
           <p class="table_name">Interior Color</p>
           <p class="table_value">
-            {{ props.data.interiorColor }}
+            {{ props.data.interiorColor ?? '--' }}
           </p>
         </div>
         <div class="table_inner">
           <p class="table_name">Exterior Color</p>
           <p class="table_value">
-            {{ props.data.exteriorColor }}
+            {{ props.data.exteriorColor ?? '--' }}
           </p>
         </div>
         <div class="table_inner">
           <p class="table_name">VIN</p>
           <p class="table_value">
-            {{ props.data.vin }}
+            {{ props.data.vin ?? '--' }}
           </p>
-        </div>
-        <div class="table_inner">
-          <p class="table_name">Asking Price</p>
-          <p class="table_value">
-            {{ functions.formatCurrency(props.data.askingPrice, "NGN") }}
-          </p>
-        </div>
-        <div class="table_btn">
-          <button class="global_btn_2">Compare Car</button>
-          <button class="global_btn" @click="$emit('requestInspection')">
-            Request Inspection
-          </button>
         </div>
       </div>
     </div>
@@ -154,21 +167,25 @@ createdData();
   flex-basis: 48%;
 }
 
+h2 {
+  font-size: 22px;
+}
+
 .car_options {
   display: flex;
   flex-wrap: wrap;
-  margin: 20px 0 40px;
+  margin: 10px 0 20px;
 }
 
 .option {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 12px 16px;
-  background-color: #eef2f4;
+  padding: 8px 16px;
+  background-color: #ffffff;
   border-radius: 4px;
   margin-right: 15px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .option p {
@@ -177,17 +194,24 @@ createdData();
 }
 
 .table_ctn {
-  background-color: #f3f8ff;
+  background-color: #ffffff;
   border: 1px solid var(--border-color);
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 30px 40px;
+}
+
+.table_title {
+  color: var(--primary-color);
+  font-size: 18px;
+  font-weight: 700;
+  /* margin-bottom: 10px; */
 }
 
 .table_inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 17px 0;
+  padding: 13px 0;
 }
 
 .table_name {
@@ -199,15 +223,50 @@ createdData();
   font-weight: 400;
 }
 
-.table_btn {
+.prices_btns_ctn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+
+.prices_ctn {
+  display: flex;
+  align-items: center;
+}
+
+.prices_ctn div {
+  margin-right: 15px;
+}
+
+.price_title {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.price_text {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.prices_btn {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
+  align-items: center;
+  /* margin-top: 20px; */
+}
+
+.global_btn_2 {
+  font-size: 13px;
+  padding: 13px 18px;
 }
 
 .global_btn {
-  margin-left: 20px;
+  margin-left: 10px;
+  font-size: 13px;
+  padding: 13px 18px;
 }
+
 
 /* .compare_btn {
   border: 1px solid var(--primary-color);

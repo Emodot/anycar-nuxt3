@@ -109,6 +109,7 @@ getCarData();
 
 <style scoped>
 .main_ctn {
+  background-color: #F2F4F7;
   padding: 120px 0;
 }
 

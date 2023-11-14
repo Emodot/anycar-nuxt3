@@ -4,7 +4,6 @@
       v-for="(card, index) in props.cardDetails"
       :key="index"
       class="card_ctn"
-      @click="selectProduct(card)"
     >
       <div class="card_image_ctn">
         <div
@@ -13,11 +12,10 @@
             backgroundImage: `url(${card.images[0].urls})`,
             height: `${imgHeight}rem`,
           }"
-        >
+        ></div>
+        <div class="card_type">
+          <p>{{ functions.capitalizeFirstLetter(card.condition) }}</p>
         </div>
-          <div class="card_type">
-            <p>{{ functions.capitalizeFirstLetter(card.condition) }}</p>
-          </div>
       </div>
       <p class="card_title">
         {{ functions.capitalizeFirstLetter(card.make) }} -
@@ -44,9 +42,9 @@
         {{ functions.formatCurrency(card.askingPrice, "NGN") }}
       </p>
       <div class="bottom_section">
-        <div class="card_btn">
+        <button class="card_btn" @click="selectProduct(card)">
           <p>View Details</p>
-        </div>
+        </button>
       </div>
     </div>
   </div>
@@ -70,13 +68,13 @@ const route = useRoute();
 const router = useRoute();
 const getRoute = () => {
   console.log(route);
-}
+};
 
 const selectProduct = (card) => {
-  if (route.name === 'compare-cars-select-car') {
-    navigateTo('/compare-cars-select-car')
+  if (route.name === "compare-cars-select-car") {
+    navigateTo("/compare-cars-select-car");
   } else {
-    navigateTo(`/buy-car/${card._id}`)
+    navigateTo(`/buy-car/${card._id}`);
   }
 };
 
@@ -125,7 +123,6 @@ getRoute();
   /* padding: 30px; */
   border-radius: 20px;
   width: 31%;
-  cursor: pointer;
   margin-bottom: 50px;
 }
 
@@ -170,7 +167,6 @@ getRoute();
   font-size: 12px;
   font-weight: 700;
 }
-
 
 .card_title {
   margin: 15px 0;

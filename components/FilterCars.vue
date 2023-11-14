@@ -7,7 +7,7 @@
           <span class="material-icons-outlined tune_icon"> tune </span>
         </div>
         <hr class="size_line" />
-        <div class="filter_inner_ctn">
+        <div v-if="selectedFilters.length" class="filter_inner_ctn">
           <div class="filter_inner">
             <p class="filter_name">Applied Filter</p>
             <p class="clear_filter" @click="clearSelected()">
@@ -21,7 +21,15 @@
               :key="index"
               class="select_value"
             >
-              <p class="selcted_item_text">{{ value }} <span class="material-icons-outlined cancel_icon" @click="removeSelected(value)"> cancel </span></p>
+              <p class="selcted_item_text">
+                {{ value }}
+                <span
+                  class="material-icons-outlined cancel_icon"
+                  @click="removeSelected(value)"
+                >
+                  cancel
+                </span>
+              </p>
             </div>
           </div>
           <hr class="size_line" />
@@ -51,7 +59,10 @@
                   v-for="(value, index) in priceOutrightValues"
                   :key="index"
                   class="select_value"
-                  @click="priceFilter = value; addSelected(value)"
+                  @click="
+                    priceFilter = value;
+                    addSelected(value);
+                  "
                 >
                   <p>{{ value }}</p>
                 </div>
@@ -63,7 +74,10 @@
                   v-for="(value, index) in priceMonthlyValues"
                   :key="index"
                   class="select_value"
-                  @click="priceFilter = value; addSelected(value)"
+                  @click="
+                    priceFilter = value;
+                    addSelected(value);
+                  "
                 >
                   <p>{{ value }}</p>
                 </div>
@@ -350,7 +364,7 @@ const fuelTypeValues = ref(["Petrol", "Diesel", "Electric", "Hybrid"]);
 const makeFilter = ref("");
 const engineTypeFilter = ref("");
 const T = ref("");
-const fuelTypeFilteT = ref("");
+const fuelTypeFilter = ref("");
 const conditionFilter = ref("");
 const yearFilter = ref("");
 const priceFilter = ref("");
@@ -374,7 +388,7 @@ const removeSelected = (data) => {
 };
 const clearSelected = () => {
   selectedFilters.value = [];
-}
+};
 
 const toggleMakeTab = () => {
   openMakeTab.value = !openMakeTab.value;
