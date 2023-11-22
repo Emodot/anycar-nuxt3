@@ -3,28 +3,29 @@
     <div class="hero_ctn">
       <div class="hero_inner">
         <p class="hero_head">
-          Drive Your Dream Car with Our <br><span class="spaned_text">Auto Financing</span> Solutions
+          Drive Your Dream Car with Our <br /><span class="spaned_text"
+            >Auto Financing</span
+          >
+          Solutions
         </p>
         <div class="hero_btns">
-          <button class="global_btn_2">
-            Check Prequalification
-          </button>
-          <button class="global_btn">
-            Start Loan Application
-          </button>
+          <button class="global_btn_2">Check Prequalification</button>
+          <button class="global_btn">Start Loan Application</button>
         </div>
       </div>
     </div>
-    <FinancingLoanCalculator />
+    <div class="body_ctn">
+      <FinancingLoanCalculator />
+      <FinancingAboutAutoFinancing />
+    </div>
   </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
 .main_ctn {
-	background-color: #F2F4F7;
+  background-color: #f2f4f7;
 }
 
 .hero_ctn {
@@ -59,5 +60,33 @@
 
 .hero_btns button {
   margin: 0 10px;
+}
+
+.body_ctn {
+  max-width: 1344px;
+  width: 80%;
+  margin: auto;
+  padding-bottom: 7rem;
+}
+
+@media only screen and (max-width: 1300px) {
+}
+
+@media only screen and (max-width: 1200px) {
+  .body_ctn {
+    width: 90%;
+    margin: auto;
+    padding-bottom: 7rem;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .hero_ctn {
+    height: 50vh;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .hero_ctn {
+    height: 70vh;
+  }
 }
 </style>
