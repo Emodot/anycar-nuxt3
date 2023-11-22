@@ -21,8 +21,8 @@
           <nuxt-link to="/compare-cars">
             <p class="menu_item">Compare</p>
           </nuxt-link>
-          <nuxt-link to="#">
-            <p class="menu_item">Verify a Car</p>
+          <nuxt-link to="/financing">
+            <p class="menu_item">Financing</p>
           </nuxt-link>
           <nuxt-link to="#">
             <p class="menu_item">Solutions</p>
