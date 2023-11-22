@@ -15,6 +15,7 @@
         </div>
       </div>
     </div>
+    <FinancingLoanCalculator />
   </div>
 </template>
 
@@ -27,7 +28,7 @@
 }
 
 .hero_ctn {
-  background-image: url("assets/images/financing_bg.jpg");
+  background-image: url("assets/images/financing_bg.webp");
   background-size: cover;
   height: 100vh;
   padding: 120px 0;
