@@ -76,7 +76,7 @@ const loanTerm = ref("");
 .calculator_ctn {
   background-color: #fafcff;
   border-radius: 10px;
-  width: 47%;
+  width: 55%;
   margin: auto;
   display: flex;
   /* align-items: center; */

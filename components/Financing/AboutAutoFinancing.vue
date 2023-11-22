@@ -1,48 +1,63 @@
 <template>
-  <div class="compare_ctn">
+  <div class="about_ctn">
     <div class="lhs">
-      <h1>
-        Compare Car Features and Make the Right Choice: Find Your Ideal Ride Today
-      </h1>
-      <p class="sub_title">
-        Discover the perfect car for your needs by easily comparing the features of different models and make a confident purchase decision.
-      </p>
-      <button class="global_btn" @click="$router.push('/compare-cars')">
-        Compare Cars
-      </button>
+      <div class="lhs_img">
+        <img src="~assets/images/about_financing.webp" alt="" />
+      </div>
     </div>
     <div class="rhs">
-      <div class="rhs_img">
-        <img src="~assets/images/option_image-1.webp" alt="">
-      </div>
+      <p class="top_title">About our Auto financing Solution</p>
+      <h1>Tailored Financing for Every Milestone</h1>
+      <p class="sub_title">
+        We understand that the road to your dream car should be smooth and
+        stress-free. That's why our auto financing solutions are designed with
+        you in mind. Enjoy low monthly payments, flexible terms, and competitive
+        interest rates tailored to fit your budget.
+      </p>
+      <p class="sub_title">
+        Whether you're eyeing a brand-new model or a reliable used car, our
+        quick approval process ensures you get behind the wheel in no time. We
+        believe in transparency, so you'll always know what to expect.
+      </p>
+      <p class="sub_title">
+        Ready to turn the key and start your journey? Apply now and experience
+        the joy of driving your dream car sooner than you think.
+      </p>
+      <button class="global_btn">Check Prequalification</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style scoped>
-.compare_ctn {
+.about_ctn {
   display: flex;
   justify-content: space-between;
   margin-top: 10rem;
 }
 
-.lhs {
+.rhs {
   flex-basis: 37%;
 }
 
+.top_title {
+  color: #02000aba;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
 h1 {
-  font-weight: 900;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
 .sub_title {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
+  color: #6b778d;
 }
 
 .add_car_section {
@@ -72,17 +87,17 @@ h1 {
   font-size: 20px;
 }
 
-.rhs {
+.lhs {
   flex-basis: 60%;
   display: flex;
   justify-content: flex-end;
 }
 
-.rhs_img {
+.lhs_img {
   width: 100%;
 }
 
-.rhs_img img {
+.lhs_img img {
   width: 100%;
   border-radius: 30px;
 }
@@ -91,7 +106,7 @@ h1 {
 }
 
 @media only screen and (max-width: 1200px) {
-  .rhs_img {
+  .lhs_img {
     width: 90%;
   }
 }
@@ -101,15 +116,15 @@ h1 {
   }
 }
 @media only screen and (max-width: 500px) {
-  .lhs {
+  .rhs {
     flex-basis: 100%;
     text-align: center;
   }
-  .lhs h1 {
+  .rhs h1 {
     text-align: center;
     width: 100%;
   }
-  .rhs {
+  .lhs {
     display: none;
   }
   .add_car_section {
