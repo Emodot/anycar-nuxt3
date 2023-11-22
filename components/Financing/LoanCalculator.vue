@@ -19,14 +19,37 @@
             <span class="material-icons-outlined arrow"> expand_more </span>
           </div>
         </div>
-        <button class="global_btn">
-          Calculate this Loan
-        </button>
+        <button class="global_btn">Calculate this Loan</button>
       </div>
       <div class="rhs">
         <div v-if="loanAnalysis" class="calculator_result">
           <p class="result_head">Estimated Monthly Loan</p>
           <p class="result_amount">N866,480</p>
+          <div class="result_details_flex">
+            <p class="result_lhs">Car Price</p>
+            <p class="result_rhs">N17,500,000</p>
+          </div>
+          <div class="result_details_flex">
+            <p class="result_lhs">Down-payment</p>
+            <p class="result_rhs">N7,126,875</p>
+          </div>
+          <div class="result_details_flex">
+            <p class="result_lhs">Loan Tenure</p>
+            <p class="result_rhs">24 Months</p>
+          </div>
+          <p class="result_details_head">Monthly Installment Includes</p>
+          <p>
+            Vehicle Registration, Comprehensive Insurance, Annual Maintenance
+            Cost, Tracker, Credit Life Insurance, Roadworthiness, Vehicle
+            Licence Renewal.
+          </p>
+          <div class="result_details_flex bottom_flex">
+            <p class="result_rhs">Benefits worth</p>
+            <p class="result_rhs">₦ 185,407 / month</p>
+          </div>
+          <div class="bottom_btn">
+          <button class="global_btn_2">Apply for Loan</button>
+          </div>
         </div>
         <div v-else class="empty_state_ctn">
           <img src="~assets/images/empty_state.webp" alt="" />
@@ -41,7 +64,7 @@
 </template>
 
 <script setup>
-const loanAnalysis = ref(true);
+const loanAnalysis = ref(false);
 const carValue = ref("");
 const loanTerm = ref("");
 </script>
@@ -53,10 +76,10 @@ const loanTerm = ref("");
 .calculator_ctn {
   background-color: #fafcff;
   border-radius: 10px;
-  width: 45%;
+  width: 47%;
   margin: auto;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .box_title {
@@ -94,6 +117,7 @@ const loanTerm = ref("");
   flex-basis: 50%;
   height: 100%;
   background-color: #fafcff;
+  border-radius: 0 10px 10px 0;
 }
 
 .empty_state_ctn {
@@ -118,5 +142,46 @@ const loanTerm = ref("");
   font-size: 14px;
   width: 70%;
   margin: auto;
+}
+
+.result_head {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.result_amount {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.result_details_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result_details_flex {
+  margin-bottom: 10px;
+}
+
+.result_rhs {
+  font-weight: 700;
+}
+
+.result_details_head {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.bottom_flex {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.bottom_btn {
+  text-align: right;
 }
 </style>
