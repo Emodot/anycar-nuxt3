@@ -1,41 +1,43 @@
 <template>
   <div class="container">
-    <div class="sell_car_ctn">
-    <div class="lhs">
-      <h1>
-        Sell your car here and Reach Thousands of Car Buyers Today
-      </h1>
-      <p class="sub_title">
-        Expand your car business by showcasing and selling your inventory to a wide audience of potential customers through our app's thriving marketplace.
-      </p>
-      <button class="global_btn">
-        <p>Sell Car</p>
-      </button>
+    <div class="how_it_works_ctn">
+      <div class="lhs">
+        <h1>How it Works</h1>
+        <p class="sub_title">
+          Unlocking simplicity in a few easy steps and embark on a hassle-free
+          journey to your dream car.
+        </p>
+        <div class="list_ctn">
+          <div class="list_icon">
+            <span class="material-icons-outlined"> check_circle </span>
+          </div>
+        </div>
+        <button class="global_btn_2">
+          <p>Check Prequalification</p>
+        </button>
+      </div>
+      <div class="rhs"></div>
     </div>
-    <div class="rhs">
-    </div>
-  </div>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style scoped>
-h1, p {
+h1,
+p {
   color: white;
 }
 
-.container  {
+.container {
   padding: 7rem 0;
-  background-image: url('assets/images/sell_car_section_img.webp');
+  background-image: url("assets/images/how-it-works.webp");
   background-position: center;
   background-size: cover;
 }
-.sell_car_ctn {
+.how_it_works_ctn {
   max-width: 1344px;
   width: 80%;
   margin: auto;
@@ -59,14 +61,15 @@ h1 {
   width: 80%;
 }
 
-.global_btn {
+.global_btn_2 {
   margin-top: 40px;
-  background-color: white;
-  color: var(--primary-color);
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
 }
 
-.global_btn p {
-  color: var(--primary-color);
+.global_btn_2 p {
+  color: white;
   font-weight: 800;
 }
 
@@ -76,19 +79,12 @@ h1 {
   font-size: 20px;
 }
 
+.list_ctn {
+  display: flex;
+}
+
 .rhs {
   flex-basis: 30%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.rhs_img {
-  width: 80%;
-}
-
-.rhs_img img {
-  width: 100%;
-  border-radius: 30px;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -98,12 +94,12 @@ h1 {
   .lhs {
     flex-basis: 50%;
   }
-  .sell_car_ctn {
+  .how_it_works_ctn {
     background-position: left;
   }
 }
 @media only screen and (max-width: 900px) {
-  .sell_car_ctn {
+  .how_it_works_ctn {
     padding: 4rem;
   }
 }
@@ -115,14 +111,14 @@ h1 {
   .rhs {
     display: none;
   }
-  .sell_car_ctn {
+  .how_it_works_ctn {
     background-position: center;
   }
-  .sell_car_ctn {
+  .how_it_works_ctn {
     padding: 2.5rem;
   }
 
-  .global_btn {
+  .global_btn_2 {
     margin: 40px auto 0;
   }
 }

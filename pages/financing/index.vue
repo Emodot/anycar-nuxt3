@@ -18,6 +18,7 @@
       <FinancingLoanCalculator />
       <FinancingAboutAutoFinancing />
     </div>
+    <FinancingHowItWorks />
   </div>
 </template>
 
