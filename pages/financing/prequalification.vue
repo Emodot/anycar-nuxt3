@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="rhs">
-        <BackBtn />
+        <BackBtn @backAction="$router.go(-1)" />
         <h2>Prequalification</h2>
         <p>Fill in the details below to check for what you can afford</p>
         <div class="form_ctn">
@@ -55,7 +55,7 @@
                 type="email"
               />
             </div>
-            <button class="global_btn step_1_btn">Next</button>
+            <button class="global_btn step_1_btn" @click="form1done">Next</button>
           </div>
           <div v-if="form2" class="form_inner form_2">
             <div class="form_top">
@@ -95,7 +95,7 @@
                 <span class="material-icons-outlined arrow"> expand_more </span>
               </div>
             </div>
-            <button class="global_btn step_1_btn">Next</button>
+            <button class="global_btn step_1_btn" @click="form2done">Next</button>
           </div>
           <div v-if="form3" class="form_inner form_3">
             <div class="form_top">
@@ -113,22 +113,22 @@
                 <p class="form_3_text">
                   Minimum Required Down payment (Equity)
                 </p>
-                <p class="form_3_amount" style="text-align: right;">N100,000</p>
+                <p class="form_3_amount" style="text-align: right">N100,000</p>
               </div>
             </div>
-            <hr class="form_line">
+            <hr class="form_line" />
             <div class="form_3_flex">
               <p class="form_3_text">Maximum Monthly Installment</p>
               <p class="form_3_text bold-text">N83,272</p>
             </div>
-            <hr class="form_line">
+            <hr class="form_line" />
             <div class="form_3_flex">
               <p class="form_3_text">Maximum Finance Tenure</p>
               <p class="form_3_text bold-text">12 Months</p>
             </div>
             <div class="btn_flex">
               <button class="global_btn_2">Edit Preference</button>
-              <button class="global_btn">View Eligible Cars</button>
+              <button class="global_btn" @click="navigateTo('/financing/eligible-cars')">View Eligible Cars</button>
             </div>
           </div>
         </div>
@@ -151,6 +151,18 @@ const personalInfo = ref({
 const form1 = ref(true);
 const form2 = ref(false);
 const form3 = ref(false);
+
+const form1done = () => {
+  form1.value = false;
+  form3.value = false;
+  form2.value = true;
+};
+
+const form2done = () => {
+  form1.value = false;
+  form2.value = false;
+  form3.value = true;
+}
 </script>
 
 <style scoped>
@@ -164,11 +176,12 @@ const form3 = ref(false);
   width: 80%;
   margin: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .lhs {
   flex-basis: 40%;
+  margin-right: 5%;
 }
 
 .lhs_inner {
@@ -178,6 +191,27 @@ const form3 = ref(false);
   background-size: cover;
   border-radius: 20px;
   height: 45rem;
+  position: relative;
+  padding: 50px;
+}
+
+.lhs_content {
+  position: absolute;
+  bottom: 70px;
+  width: 80%;
+}
+
+.lhs_head {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 40px;
+  margin-bottom: 10px;
+}
+
+.lhs_text {
+  color: white;
+  font-size: 16px;
 }
 
 .rhs {
@@ -254,7 +288,7 @@ const form3 = ref(false);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .btn_flex button {

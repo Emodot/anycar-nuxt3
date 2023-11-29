@@ -228,6 +228,7 @@
           v-if="props.data?.docs?.length"
           :card-details="data?.docs"
           :img-height="16"
+          @cardAction="cardAction"
         />
         <div v-else class="empty_state_ctn">
           <div>
@@ -377,6 +378,12 @@ const openEngineTypeTab = ref(false);
 const openTransmissionTypeTab = ref(false);
 const openFuelTypeTab = ref(false);
 const openConditionTab = ref(false);
+
+
+const cardAction = (val) => {
+  console.log(val);
+  emit('cardAction', val)
+}
 
 const addSelected = (data) => {
   selectedFilters.value.push(data);
