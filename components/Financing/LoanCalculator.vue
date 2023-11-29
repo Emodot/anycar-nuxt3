@@ -19,7 +19,7 @@
             <span class="material-icons-outlined arrow"> expand_more </span>
           </div>
         </div>
-        <button class="global_btn">Calculate this Loan</button>
+        <button class="global_btn" @click="loanAnalysis = true">Calculate this Loan</button>
       </div>
       <div class="rhs">
         <div v-if="loanAnalysis" class="calculator_result">
@@ -48,7 +48,7 @@
             <p class="result_rhs">₦ 185,407 / month</p>
           </div>
           <div class="bottom_btn">
-          <button class="global_btn_2">Apply for Loan</button>
+          <button class="global_btn_2" @click="navigateTo('/financing/prequalification')">Apply for Loan</button>
           </div>
         </div>
         <div v-else class="empty_state_ctn">
