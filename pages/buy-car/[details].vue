@@ -2,10 +2,7 @@
   <div class="main_ctn">
     <div class="inner">
       <div class="top">
-        <div class="back_ctn" @click="$router.go(-1)">
-          <span class="material-icons-outlined"> arrow_back </span>
-          <p>Back</p>
-        </div>
+        <BackBtn />
         <div class="search_side">
           <SearchInput />
         </div>
