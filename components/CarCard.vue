@@ -42,7 +42,7 @@
         {{ functions.formatCurrency(card.askingPrice, "NGN") }}
       </p>
       <div class="bottom_section">
-        <button class="card_btn" @click="selectProduct(card)">
+        <button class="card_btn" @click="$emit('cardAction', card)">
           <p>View Details</p>
         </button>
       </div>

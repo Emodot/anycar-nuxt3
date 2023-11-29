@@ -2,9 +2,9 @@
   <div class="main_ctn">
     <div class="inner">
       <div class="top">
-        <BackBtn />
+        <BackBtn @backAction="$router.go(-1)"/>
         <div class="search_side">
-          <SearchInput />
+          <SearchInput :type="'icon'" />
         </div>
       </div>
       <div v-if="!carDataLoading">

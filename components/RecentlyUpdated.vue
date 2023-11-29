@@ -12,7 +12,7 @@
       </div>
     </div>
     <div v-if="!props.loading" class="product_list_ctn">
-      <CarCard :card-details="props.data" />
+      <CarCard :card-details="props.data"  @cardAction="selectProduct"/>
     </div>
     <div v-else class="page_loader_ctn">
       <PageLoader />
@@ -38,6 +38,11 @@ const props = defineProps({
     default: false,
   }
 });
+
+const selectProduct = (val) => {
+  console.log(val);
+  navigateTo(`/buy-car/${val._id}`);
+}
 
 // const { data } = props;
 

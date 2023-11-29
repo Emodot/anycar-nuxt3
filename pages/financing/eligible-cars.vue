@@ -2,7 +2,7 @@
   <div class="main_ctn">
     <div class="inner">
       <div class="top_section">
-        <h2 class="title">Search for Cars on AnyCar</h2>
+        <h2 class="title">Cars within your budget</h2>
         <SearchInput />
         <div class="content">
           <FilterCars
@@ -45,7 +45,7 @@ const fuelType = ref("");
 
 const selectProduct = (val) => {
   console.log(val);
-  navigateTo(`/buy-car/${val._id}`);
+  navigateTo(`/financing/application`);
 }
 
 const changePage = (val) => {
