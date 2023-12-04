@@ -185,7 +185,7 @@ const form2done = () => {
 }
 
 .lhs_inner {
-  background-image: url("assets/images/prequalification_1.png");
+  background-image: url("assets/images/prequalification_1.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
