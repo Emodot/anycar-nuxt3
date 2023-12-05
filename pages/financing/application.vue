@@ -58,7 +58,7 @@
               </div>
             </div>
             <div class="application_form">
-              <div class="start_form">
+              <div v-if="activeSection === 'Start Form'" class="start_form">
                 <p class="head">HOW IT WORKS</p>
                 <p class="sub_head">
                   Your New Car Awaits: Apply for Financing in Minutes
@@ -80,7 +80,8 @@
                     </div>
                     <p class="box_title">Await Our Feedback</p>
                     <p class="box_text">
-                      Anticipate our prompt response as we carefully review your information and prepare tailored feedback
+                      Anticipate our prompt response as we carefully review your
+                      information and prepare tailored feedback
                     </p>
                   </div>
                   <div class="box">
@@ -89,11 +90,218 @@
                     </div>
                     <p class="box_title">Inspect Your Car</p>
                     <p class="box_text">
-                      Upon successful feedback, you can inspect your car, pay down payment and drive your car home
+                      Upon successful feedback, you can inspect your car, pay
+                      down payment and drive your car home
                     </p>
                   </div>
                 </div>
-                <button class="global_btn">Start Application</button>
+                <button
+                  class="global_btn"
+                  @click="activeSection = 'Personal Infomation'"
+                >
+                  Start Application
+                </button>
+              </div>
+              <div
+                v-if="activeSection === 'Personal Infomation'"
+                class="personal_info_form"
+              >
+                <p class="form_title">Personal Information</p>
+                <div class="input_flex">
+                  <div class="input_flex_item">
+                    <p class="label">First Name</p>
+                    <input
+                      v-model="applicationForm.firstName"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                  <div class="input_flex_item">
+                    <p class="label">Last Name</p>
+                    <input
+                      v-model="applicationForm.lastName"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="input_flex">
+                  <div class="input_flex_item">
+                    <p class="label">Date of Birth</p>
+                    <input
+                      v-model="applicationForm.dob"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                  <div class="input_flex_item">
+                    <p class="label">Email Address</p>
+                    <input
+                      v-model="applicationForm.email"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="input_flex">
+                  <div class="input_flex_item">
+                    <p class="label">Phone Number</p>
+                    <input
+                      v-model="applicationForm.phone"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                  <div class="input_flex_item">
+                    <p class="label">National Identification Number (NIN)</p>
+                    <input
+                      v-model="applicationForm.nin"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="input_flex">
+                  <div class="input_flex_item">
+                    <p class="label">Your BVN</p>
+                    <input
+                      v-model="applicationForm.bvn"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                  <div class="input_flex_item">
+                    <p class="label">Gender</p>
+                    <input
+                      v-model="applicationForm.gender"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="input_flex">
+                  <div class="input_flex_item">
+                    <p class="label">Nationality</p>
+                    <input
+                      v-model="applicationForm.nationality"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                  <div class="input_flex_item">
+                    <p class="label">Nationality Status</p>
+                    <input
+                      v-model="applicationForm.nationality_status"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="bottom_btn">
+                  <button
+                    class="global_btn"
+                    @click="activeSection = 'Profession'"
+                  >
+                    Proceed
+                  </button>
+                </div>
+              </div>
+              <div
+                v-if="activeSection === 'Profession'"
+                class="profession_form"
+              >
+                <p class="form_title">Profession</p>
+                <p class="main_label">What best describes you?</p>
+                <div class="radio_ctn">
+                  <div class="radio_ctn_div">
+                    <input v-model="applicationForm.profession" type="radio" value="salary earner" name="profession" id="salary earner" />
+                    <label for="salary earner">Salary Earner</label>
+                  </div>
+                  <div class="radio_ctn_div">
+                    <input v-model="applicationForm.profession" type="radio" value="business owner" name="profession" id="business owner" />
+                    <label for="business owner">Business Owner</label>
+                  </div>
+                </div>
+                <div v-if="applicationForm.profession === 'salary earner'" class="radio_content">
+                  <p class="main_label">Employer's Information</p>
+                  <div class="input_flex">
+                    <div class="input_flex_item">
+                      <p class="label">Employment Type</p>
+                      <input
+                        class="form_input"
+                        type="text"
+                      />
+                    </div>
+                    <div class="input_flex_item">
+                      <p class="label">Industry</p>
+                      <input
+                        class="form_input"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="input_flex">
+                    <div class="input_flex_item">
+                      <p class="label">Employment Type</p>
+                      <input
+                        class="form_input"
+                        type="text"
+                      />
+                    </div>
+                    <div class="input_flex_item">
+                      <p class="label">Industry</p>
+                      <input
+                        class="form_input"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="input_flex">
+                    <div class="input_flex_item">
+                      <p class="label">Employment Type</p>
+                      <input
+                        class="form_input"
+                        type="text"
+                      />
+                    </div>
+                    <div class="input_flex_item">
+                      <p class="label">Industry</p>
+                      <input
+                        class="form_input"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <p class="main_label">Income and Expenses</p>
+                  <div class="input_flex">
+                    <div class="input_flex_item">
+                      <p class="label">Total Take-Home Pay (after salary deduction)</p>
+                      <input
+                        class="form_input"
+                        type="text"
+                      />
+                    </div>
+                    <div class="input_flex_item">
+                      <p class="label">Total Monthly Expenses</p>
+                      <input
+                        class="form_input"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <p class="main_label">Vehicle Purpose</p>
+                  <div class="input_flex">
+                    <div class="input_flex_item">
+                      <p class="label">What will the vehicle be used for?</p>
+                      <input
+                        class="form_input"
+                        type="text"
+                      />
+                    </div>
+                    <div class="input_flex_item">
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -103,7 +311,23 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+// const activeSection = ref("Personal Infomation");
+const activeSection = ref("Start Form");
+const applicationForm = ref({
+  firstName: "",
+  lastName: "",
+  phone: "",
+  email: "",
+  dob: "",
+  nin: "",
+  bvn: "",
+  gender: "",
+  nationality: "",
+  nationality_status: "",
+  profession: "",
+});
+</script>
 
 <style scoped>
 .main_ctn {
@@ -235,7 +459,7 @@
   background: #f4f4fb;
   box-shadow: 0px 4px 30px 0px #150a410a;
   padding: 25px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .icons_bar {
@@ -268,7 +492,7 @@
 .application_form {
   border-radius: 20px;
   background: #fff;
-  padding: 4rem;
+  padding: 3rem;
 }
 
 .start_form .head {
@@ -328,6 +552,46 @@
   text-align: center;
 }
 
+.form_title {
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.bottom_btn {
+  text-align: right;
+  margin-top: 40px;
+}
+
+.main_label {
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  margin-top: 40px;
+}
+
+.radio_ctn {
+  display: flex;
+}
+
+.radio_ctn_div {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.radio_ctn_div input {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 2px solid var(--primary-color);
+}
+
+.radio_content {
+  margin-top: 40px;
+}
 
 @media only screen and (max-width: 1300px) {
   .inner {
