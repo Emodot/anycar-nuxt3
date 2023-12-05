@@ -214,91 +214,457 @@
                 <p class="main_label">What best describes you?</p>
                 <div class="radio_ctn">
                   <div class="radio_ctn_div">
-                    <input v-model="applicationForm.profession" type="radio" value="salary earner" name="profession" id="salary earner" />
+                    <input
+                      v-model="applicationForm.profession"
+                      type="radio"
+                      value="salary earner"
+                      name="profession"
+                      id="salary earner"
+                    />
                     <label for="salary earner">Salary Earner</label>
                   </div>
                   <div class="radio_ctn_div">
-                    <input v-model="applicationForm.profession" type="radio" value="business owner" name="profession" id="business owner" />
+                    <input
+                      v-model="applicationForm.profession"
+                      type="radio"
+                      value="business owner"
+                      name="profession"
+                      id="business owner"
+                    />
                     <label for="business owner">Business Owner</label>
                   </div>
                 </div>
-                <div v-if="applicationForm.profession === 'salary earner'" class="radio_content">
+                <div
+                  v-if="applicationForm.profession === 'salary earner'"
+                  class="radio_content"
+                >
                   <p class="main_label">Employer's Information</p>
                   <div class="input_flex">
                     <div class="input_flex_item">
                       <p class="label">Employment Type</p>
-                      <input
-                        class="form_input"
-                        type="text"
-                      />
+                      <input class="form_input" type="text" />
                     </div>
                     <div class="input_flex_item">
                       <p class="label">Industry</p>
-                      <input
-                        class="form_input"
-                        type="text"
-                      />
+                      <input class="form_input" type="text" />
                     </div>
                   </div>
                   <div class="input_flex">
                     <div class="input_flex_item">
                       <p class="label">Employment Type</p>
-                      <input
-                        class="form_input"
-                        type="text"
-                      />
+                      <input class="form_input" type="text" />
                     </div>
                     <div class="input_flex_item">
                       <p class="label">Industry</p>
-                      <input
-                        class="form_input"
-                        type="text"
-                      />
+                      <input class="form_input" type="text" />
                     </div>
                   </div>
                   <div class="input_flex">
                     <div class="input_flex_item">
                       <p class="label">Employment Type</p>
-                      <input
-                        class="form_input"
-                        type="text"
-                      />
+                      <input class="form_input" type="text" />
                     </div>
                     <div class="input_flex_item">
                       <p class="label">Industry</p>
-                      <input
-                        class="form_input"
-                        type="text"
-                      />
+                      <input class="form_input" type="text" />
                     </div>
                   </div>
                   <p class="main_label">Income and Expenses</p>
                   <div class="input_flex">
                     <div class="input_flex_item">
-                      <p class="label">Total Take-Home Pay (after salary deduction)</p>
-                      <input
-                        class="form_input"
-                        type="text"
-                      />
+                      <p class="label">
+                        Total Take-Home Pay (after salary deduction)
+                      </p>
+                      <input class="form_input" type="text" />
                     </div>
                     <div class="input_flex_item">
                       <p class="label">Total Monthly Expenses</p>
-                      <input
-                        class="form_input"
-                        type="text"
-                      />
+                      <input class="form_input" type="text" />
                     </div>
                   </div>
                   <p class="main_label">Vehicle Purpose</p>
                   <div class="input_flex">
                     <div class="input_flex_item">
                       <p class="label">What will the vehicle be used for?</p>
-                      <input
-                        class="form_input"
-                        type="text"
-                      />
+                      <input class="form_input" type="text" />
+                    </div>
+                    <div class="input_flex_item"></div>
+                  </div>
+                </div>
+                <div
+                  v-if="applicationForm.profession === 'business owner'"
+                  class="radio_content"
+                >
+                  <p class="main_label">Business Details</p>
+                  <div class="input_flex">
+                    <div class="input_flex_item">
+                      <p class="label">Employment Type</p>
+                      <input class="form_input" type="text" />
                     </div>
                     <div class="input_flex_item">
+                      <p class="label">Industry</p>
+                      <input class="form_input" type="text" />
+                    </div>
+                  </div>
+                  <div class="input_flex">
+                    <div class="input_flex_item">
+                      <p class="label">Employment Type</p>
+                      <input class="form_input" type="text" />
+                    </div>
+                    <div class="input_flex_item">
+                      <p class="label">Industry</p>
+                      <input class="form_input" type="text" />
+                    </div>
+                  </div>
+                  <div class="input_flex">
+                    <div class="input_flex_item">
+                      <p class="label">Employment Type</p>
+                      <input class="form_input" type="text" />
+                    </div>
+                    <div class="input_flex_item">
+                      <p class="label">Industry</p>
+                      <input class="form_input" type="text" />
+                    </div>
+                  </div>
+                  <p class="main_label">Business Finance Details</p>
+                  <div class="input_flex">
+                    <div class="input_flex_item">
+                      <p class="label">
+                        Total Take-Home Pay (after salary deduction)
+                      </p>
+                      <input class="form_input" type="text" />
+                    </div>
+                    <div class="input_flex_item">
+                      <p class="label">Total Monthly Expenses</p>
+                      <input class="form_input" type="text" />
+                    </div>
+                  </div>
+                  <p class="main_label">Vehicle Purpose</p>
+                  <div class="input_flex">
+                    <div class="input_flex_item">
+                      <p class="label">What will the vehicle be used for?</p>
+                      <input class="form_input" type="text" />
+                    </div>
+                    <div class="input_flex_item"></div>
+                  </div>
+                </div>
+                <div class="bottom_btn">
+                  <button
+                    class="global_btn"
+                    @click="activeSection = 'Loan Preferences'"
+                  >
+                    Proceed
+                  </button>
+                </div>
+              </div>
+              <div
+                v-if="activeSection === 'Loan Preferences'"
+                class="profession_form"
+              >
+                <p class="form_title">Loan Preferences</p>
+                <div class="input_flex">
+                  <div class="input_flex_item">
+                    <p class="label">Desired Loan Term</p>
+                    <input
+                      v-model="applicationForm.firstName"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                  <div class="input_flex_item">
+                    <p class="label">Desired Repayment Date</p>
+                    <input
+                      v-model="applicationForm.lastName"
+                      class="form_input"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div class="radio_box">
+                  <p class="label">
+                    Do you want to continue insurance subscription after the
+                    first year of the loan?
+                  </p>
+                  <div class="radio_ctn">
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="yes"
+                        id="yes"
+                      />
+                      <label for="yes">Yes</label>
+                    </div>
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="no"
+                        id="no"
+                      />
+                      <label for="no">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="radio_box">
+                  <p class="label">
+                    Do you want to continue maintenance plan subscription after
+                    the first year of the loan?
+                  </p>
+                  <div class="radio_ctn">
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="yes"
+                        id="yes"
+                      />
+                      <label for="yes">Yes</label>
+                    </div>
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="no"
+                        id="no"
+                      />
+                      <label for="no">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="radio_box">
+                  <p class="label">
+                    Do you want to subscribe to roadworthiness for the full term
+                    of the loan?
+                  </p>
+                  <div class="radio_ctn">
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="yes"
+                        id="yes"
+                      />
+                      <label for="yes">Yes</label>
+                    </div>
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="no"
+                        id="no"
+                      />
+                      <label for="no">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="radio_box">
+                  <p class="label">
+                    Do you want to subscribe to licence renewal for the full
+                    term of the loan?
+                  </p>
+                  <div class="radio_ctn">
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="yes"
+                        id="yes"
+                      />
+                      <label for="yes">Yes</label>
+                    </div>
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="no"
+                        id="no"
+                      />
+                      <label for="no">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="radio_box">
+                  <p class="label">
+                    Do you want to pay for your fees upfront or monthly as part
+                    of your installment?
+                  </p>
+                  <div class="radio_ctn">
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="yes"
+                        id="yes"
+                      />
+                      <label for="yes">Yes</label>
+                    </div>
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="no"
+                        id="no"
+                      />
+                      <label for="no">No</label>
+                    </div>
+                  </div>
+                </div>
+                <p class="main_label">
+                  Do you want to pay for any of the following items upfront
+                  instead of financing it as part of the loan?
+                </p>
+                <div class="checkbox_ctn">
+                  <div class="checkbox_ctn_div">
+                    <input
+                      type="checkbox"
+                      value="Vehicle Registration"
+                      id="Vehicle Registration"
+                      v-model="fruits"
+                    />
+                    <label for="Vehicle Registration"
+                      >Vehicle Registration</label
+                    >
+                  </div>
+                  <div class="checkbox_ctn_div">
+                    <input
+                      type="checkbox"
+                      value="Insurance (First 12 months)"
+                      id="Insurance"
+                      v-model="fruits"
+                    />
+                    <label for="Insurance">Insurance (First 12 months)</label>
+                  </div>
+                  <div class="checkbox_ctn_div">
+                    <input
+                      type="checkbox"
+                      value="Vehicle Tracking"
+                      id="Vehicle Tracking"
+                      v-model="fruits"
+                    />
+                    <label for="Vehicle Tracking">Vehicle Tracking</label>
+                  </div>
+                  <div class="checkbox_ctn_div">
+                    <input
+                      type="checkbox"
+                      value="Vehicle Tracking"
+                      id="Vehicle Tracking"
+                      v-model="fruits"
+                    />
+                    <label for="Vehicle Tracking">Vehicle Tracking</label>
+                  </div>
+                  <div class="checkbox_ctn_div">
+                    <input
+                      type="checkbox"
+                      value="Vehicle Tracking"
+                      id="Vehicle Tracking"
+                      v-model="fruits"
+                    />
+                    <label for="Vehicle Tracking">Vehicle Tracking</label>
+                  </div>
+                </div>
+                <div class="bottom_btn">
+                  <button
+                    class="global_btn"
+                    @click="activeSection = 'Content and Terms'"
+                  >
+                    Proceed
+                  </button>
+                </div>
+              </div>
+              <div
+                v-if="activeSection === 'Content and Terms'"
+                class="profession_form"
+              >
+                <p class="form_title">Content and Terms</p>
+                <div class="radio_box">
+                  <p class="label">
+                    I hereby consent that Anycar make enquiries regarding my
+                    credit history with any credit bureau. I consent that Anycar
+                    reports the conclusion of any credit agreement with me to
+                    the relevant credit reporting regulator. I hereby declare
+                    that the information provided by me is true and correct.
+                  </p>
+                  <div class="radio_ctn">
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="yes"
+                        id="yes"
+                      />
+                      <label for="yes">Yes</label>
+                    </div>
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="no"
+                        id="no"
+                      />
+                      <label for="no">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="radio_box">
+                  <p class="label">
+                    Finance is subject to an approval based on your credit
+                    profile and affordability of the vehicle. The submission of
+                    this finance application will not result in the immediate
+                    reservation of this vehicle, nor will it guarantee the
+                    availability of this vehicle in the future.
+                  </p>
+                  <div class="radio_ctn">
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="yes"
+                        id="yes"
+                      />
+                      <label for="yes">Yes</label>
+                    </div>
+                    <div class="radio_ctn_div">
+                      <input
+                        v-model="applicationForm.profession"
+                        type="radio"
+                        value="no"
+                        id="no"
+                      />
+                      <label for="no">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="bottom_btn">
+                  <button
+                    class="global_btn"
+                    @click="activeSection = 'Congratulations'"
+                  >
+                    Proceed
+                  </button>
+                </div>
+              </div>
+              <div
+                v-if="activeSection === 'Congratulations'"
+                class="congratulations_ctn"
+              >
+                <div class="congratulations reveals" @click.stop>
+                  
+                    <p class="congratulations_title">Congratulations!</p>
+                  <div class="congratulations_content">
+                    <div class="congratulations_icon">
+                      <img src="~assets/icons/success.gif" alt="" />
+                    </div>
+                    <p class="congratulations_text">
+                      Finance is subject to an approval based on your credit profile and affordability of the vehicle. The submission of this finance application will not result in the immediate reservation of this vehicle, nor will it guarantee the availability of this vehicle in the future.
+                    </p>
+                    <div class="congratulations_btn">
+                      <button class="global_btn_2" @click="$emit('close-congratulations')">
+                        Return Home
+                      </button>
+                      <button class="global_btn">
+                        My Dashboard
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -574,6 +940,7 @@ const applicationForm = ref({
 
 .radio_ctn {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .radio_ctn_div {
@@ -586,12 +953,97 @@ const applicationForm = ref({
   width: 20px;
   height: 20px;
   margin-right: 10px;
-  border: 2px solid var(--primary-color);
+  /* border: 2px solid var(--primary-color); */
+}
+
+.radio_box {
+  margin-top: 20px;
 }
 
 .radio_content {
   margin-top: 40px;
 }
+
+.checkbox_ctn {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkbox_ctn_div {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+  margin-bottom: 20px;
+}
+
+.checkbox_ctn_div input {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  /* border: 2px solid var(--primary-color); */
+}
+
+
+.congratulations {
+  /* margin-top: 5%; */
+  margin: auto;
+  position: relative;
+  background-color: white;
+  width: 80%;
+  max-width: 550px;
+  height: fit-content;
+  align-items: center;
+  border-radius: 20px;
+  overflow-y: auto;
+  padding: 40px 4rem;
+}
+
+.congratulations_icon {
+  width: 50%;
+  margin: auto;
+  margin-top: -40px;
+}
+
+.congratulations_icon img {
+  width: 100%;
+  text-align: center;
+}
+
+.congratulations_text {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  margin-top: -30px;
+}
+
+.congratulations_title {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  cursor: pointer;
+  color: #C5C5C5;
+  right: 2rem;
+  top: 2rem;
+}
+
+.congratulations_content {
+  margin-top: 10px;
+}
+
+.congratulations_btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.congratulations_btn .global_btn_2 {
+  margin-right: 20px;
+}
+
 
 @media only screen and (max-width: 1300px) {
   .inner {

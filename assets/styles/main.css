@@ -50,6 +50,11 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+input[type=checkbox] {
+	height: 20px;
+	width: 20px;
+}
+
 a {
   text-decoration: none;
 }
