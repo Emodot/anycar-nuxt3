@@ -27,8 +27,6 @@
 
 <script setup>
 import axios from "axios";
-const config = useRuntimeConfig();
-const baseUrl = config.public.BASE_URL;
 
 const getCarsLoading = ref(false);
 const cars = ref({});
@@ -167,10 +165,9 @@ const filterFuelType = (val) => {
 };
 const getCars = (currentPage, make, year, maxPrice, maxMileage, type) => {
   getCarsLoading.value = true;
-  // console.log(type)
   const path = `api/sell?pageNumber=${currentPage}&pageSize=9&make=${make}&year=${year}&maxPrice=${maxPrice}&maxMileage=${maxMileage}&type=${type}`;
   axios
-    .get(`${baseUrl}${path}`)
+    .get(path)
     .then((response) => {
       console.log(response.data);
       cars.value = response.data;

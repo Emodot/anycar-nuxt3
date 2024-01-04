@@ -21,18 +21,14 @@
 
 <script setup>
 import axios from "axios";
-const config = useRuntimeConfig();
-const baseUrl = config.public.BASE_URL;
 
 const cars = ref([]);
 const fetchCarsLoading = ref(false);
 
 const fetchCars = () => {
   fetchCarsLoading.value = true;
-  // console.log(baseUrl);
-  const path = "api/sell";
   axios
-    .get(`${baseUrl}${path}`)
+    .get("api/sell")
     .then((response) => {
       console.log(response);
       const updatedCars = response.data.docs;
