@@ -1,5 +1,9 @@
 <template>
   <div class="form_container" @click="showItemList = false">
+    <div class="top_section">
+      <p class="form_title">Fill in your Car Details</p>
+      <p class="form_step">Step 1 of 4</p>
+    </div>
     <div class="form_inner">
       <div class="input_ctn" @click.stop>
         <p class="label">Make</p>
@@ -39,6 +43,12 @@
       </div>
       <div class="input_ctn">
         <p class="label">Year of Manufacture</p>
+        <VueDatePicker
+          v-model="formOne.year_manufacture"
+          @update:model-value="getDate"
+          year-picker
+          :year-range="[1990, 2024]"
+        ></VueDatePicker>
         <!-- <datepicker
           :value="formOne.year_manufacture"
           :format="'yyyy'"
@@ -92,47 +102,31 @@
           <span class="material-icons-outlined arrow"> expand_more </span>
         </div>
       </div>
+      <button class="global_btn" @click="saveForm()">
+        Next
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+
 import moment from "moment";
 import axios from "axios";
-const config = useRuntimeConfig();
-const baseUrl = config.public.BASE_URL;
 const emit = defineEmits(["next"]);
+const dataStore = useDataStore();
 
-const sellCarData = useSellCarStore();
+const sellCarData = useDataStore();
 console.log(sellCarData);
-// const { sellCarData } = storeToRefs(useSellCarStore());
 
 const props = defineProps({
-  saveForm: {
-    type: Boolean,
-    default: false,
-  },
   closeList: {
     type: Boolean,
     default: false,
   },
 });
-
-watch(
-  () => props.saveForm,
-  (first, second) => {
-    console.log("form-one-first", first);
-    console.log("form-one-sec", second);
-    if (val) {
-      console.log(formOne.year_manufacture.value);
-      $store.dispatch("setSellCarForm", formOne.value);
-      emit("next");
-    }
-  },
-  {
-    immediate: true,
-  }
-);
 
 const showItemList = ref(false);
 const makeLoading = ref(false);
@@ -144,17 +138,17 @@ const formOne = ref({
   make: "",
   model: "",
   year_manufacture: 0,
-  formattedYear: 0,
   condition: "",
   transmission_type: "",
 });
 
 const selectMake = (data) => {
   console.log(data);
-  formOne.make.value = data.name;
-  formOne.makeId.value = data.id;
+  formOne.value.make = data.name;
+  formOne.value.makeId = data.id;
   showItemList.value = false;
-  if (formOne.formattedYear.value !== 0) {
+  console.log(formOne.value.year_manufacture);
+  if (formOne.value.year_manufacture !== 0) {
     getModels();
   }
 };
@@ -164,11 +158,11 @@ const getMake = () => {
     .get("api/make")
     .then((response) => {
       console.log(response);
-      carMakes.value = response.docs.data;
+      carMakes.value = response.data.docs.data;
     })
     .catch((_err) => {
       const { message } = _err?.response?.data?.error || _err?.message;
-      apiErrorMessage.value = message;
+      // apiErrorMessage.value = message;
     })
     .finally(() => {
       makeLoading.value = false;
@@ -176,74 +170,65 @@ const getMake = () => {
 };
 const getModels = (year) => {
   modelLoading.value = true;
-  const path = `api/model?year=${formOne.formattedYear.value}&make_id=${formOne.makeId.value}`;
+  const path = `api/model?year=${formOne.value.year_manufacture}&make_id=${formOne.value.makeId}`;
   axios
     .get(path)
     .then((response) => {
       console.log(response);
-      carModels.value = response.data.data;
+      carModels.value = response.data.data.data;
     })
     .catch((_err) => {
       console.log(_err);
       const { message } = _err?.response?.data?.error || _err?.message;
 
-      apiErrorMessage.value = message;
+      // apiErrorMessage.value = message;
     })
     .finally(() => {
       modelLoading.value = false;
     });
 };
-const customFormatter = (date) => {
-  return moment(date).format("YYYY");
-};
+// const customFormatter = (date) => {
+//   return moment(date).format("YYYY");
+// };
 const getDate = (val) => {
   console.log(val);
-  formOne.year_manufacture.value = val;
-  const dateString = val;
-  formOne.formattedYear.value = new Date(dateString).getFullYear();
-  console.log(formOne.formattedYear.value);
   getModels();
+};
+
+const saveForm = () => {
+  console.log(formOne.value);
+  dataStore.setSellCarForm(formOne.value)
+  emit("next");
 };
 
 const formData = sellCarData.sellCarForm;
 console.log(formData);
-formOne.make.value = formData.make;
-formOne.makeId.value = formData.makeId;
-formOne.model.value = formData.model;
-formOne.year_manufacture.value = formData.year_manufacture;
-formOne.formattedYear.value = formData.formattedYear;
-formOne.condition.value = formData.condition;
-formOne.transmission_type.value = formData.transmission_type;
-getMake();
-getModels();
+formOne.value.make = formData.make;
+formOne.value.makeId = formData.makeId;
+formOne.value.model = formData.model;
+formOne.value.year_manufacture = formData.year_manufacture;
+formOne.value.condition = formData.condition;
+formOne.value.transmission_type = formData.transmission_type;
 
-// export default {
-//   watch: {
-//     saveForm: {
-//       immediate: true,
-//       handler(val) {
-//         // console.log(val)
-//         if (val) {
-//           console.log(this.formOne.year_manufacture);
-//           this.$store.dispatch("setSellCarForm", this.formOne);
-//           this.$emit("next");
-//         }
-//       },
-//     },
-//     closeList: {
-//       // immediate: true,
-//       handler(val) {
-//         console.log(val);
-//         if (val) {
-//           this.showItemList = false;
-//         }
-//       },
-//     },
-//   },
-// };
+getMake();
+// getModels();
 </script>
 
 <style scoped>
+.top_section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.form_title {
+  font-size: 20px;
+  font-weight: 700;
+}
+.form_step {
+  font-size: 14px;
+}
 .custom_input_box {
   display: flex;
   align-items: center;
@@ -274,5 +259,9 @@ getModels();
   cursor: pointer;
   padding: 15px 0 15px 20px;
   background-color: #fff;
+}
+
+.global_btn {
+  width: 100%;
 }
 </style>

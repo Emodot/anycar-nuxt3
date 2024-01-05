@@ -18,6 +18,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  build: {
+    transpile: ["@vuepic/vue-datepicker"],
+  },
   devtools: { enabled: true },
   css: ["@/assets/styles/main.css"],
   imports: {
@@ -32,9 +35,9 @@ export default defineNuxtConfig({
     ],
     "@pinia-plugin-persistedstate/nuxt",
   ],
-  piniaPersistedstate: {
-    storage: "localStorage",
-  },
+  // piniaPersistedstate: {
+  //   storage: "localStorage",
+  // },
   runtimeConfig: {
     public: {
       BASE_URL: process.env.BASE_URL || "https://cara-4oc8.onrender.com/",

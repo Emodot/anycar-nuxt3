@@ -254,10 +254,11 @@ h1 {
 
 /* datepicker */
 
-.datePicker {
+.dp__input {
 	cursor: pointer;
 	border-radius: 6px;
-	border: 1px solid var(--primary-color);
+	border: 1px solid var(--primary-color) !important;
+	background-color: transparent !important;
 	height: 55px;
 	width: 100%;
 	padding: 0 20px;
