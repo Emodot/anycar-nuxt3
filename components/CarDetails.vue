@@ -61,8 +61,8 @@
             </div>
           </div>
           <div class="prices_btn">
-            <button class="global_btn_2">Pay cash</button>
-            <button class="global_btn" @click="$emit('requestInspection')">
+            <button class="global_btn_2" @click="$emit('requestInspection')">Pay cash</button>
+            <button class="global_btn" @click="$router.push('/financing/application')">
               Apply for Loan
             </button>
           </div>

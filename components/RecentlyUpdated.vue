@@ -20,9 +20,8 @@
     <div class="bottom_text">
       <p>
         Didn’t find what you were looking for?
-        <span class="bottom_link">See more</span>
       </p>
-      <span class="material-icons-outlined"> arrow_forward </span>
+      <p class="see_more_link" @click="$router.push('/buy-car')">See more <span class="material-icons-outlined"> arrow_forward </span></p>
     </div>
   </div>
 </template>
@@ -113,22 +112,26 @@ const selectProduct = (val) => {
   justify-content: center;
 }
 
-.bottom_text p {
+.bottom_text > p {
   text-align: center;
   color: var(--primary-color);
   font-size: 16px;
 }
 
-.bottom_link {
+.see_more_link {
   color: #053361;
   font-size: inherit;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  cursor: pointer;
 }
 
 .material-icons-outlined {
   color: #053361;
   font-size: 18px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 @media only screen and (max-width: 900px) {
