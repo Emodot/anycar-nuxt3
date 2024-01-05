@@ -113,13 +113,10 @@
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
-import moment from "moment";
+// import moment from "moment";
 import axios from "axios";
 const emit = defineEmits(["next"]);
 const dataStore = useDataStore();
-
-const sellCarData = useDataStore();
-console.log(sellCarData);
 
 const props = defineProps({
   closeList: {
@@ -196,12 +193,11 @@ const getDate = (val) => {
 };
 
 const saveForm = () => {
-  console.log(formOne.value);
   dataStore.setSellCarForm(formOne.value)
   emit("next");
 };
 
-const formData = sellCarData.sellCarForm;
+const formData = dataStore.sellCarForm;
 console.log(formData);
 formOne.value.make = formData.make;
 formOne.value.makeId = formData.makeId;
@@ -262,6 +258,7 @@ getMake();
 }
 
 .global_btn {
+  margin-top: 20px;
   width: 100%;
 }
 </style>

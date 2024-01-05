@@ -25,6 +25,7 @@
     "moment": "^2.29.4",
     "pinia": "^2.1.7",
     "v-money": "^0.8.1",
+    "vue-currency-input": "^3.0.5",
     "vue-slider-component": "^3.2.24",
     "vue-toasted": "^1.1.28",
     "vuex": "^4.1.0",

@@ -1,15 +1,6 @@
 <template>
   <div class="main_ctn" @click="closeList = true">
     <div class="inner">
-      <!-- <div class="top_section">
-        <div>
-          <h2 class="title">Sell your car, new or old</h2>
-          <p class="sub_title">
-            Kindly upload the details of your car, once approved, it will be
-            visible to potential buyers
-          </p>
-        </div>
-      </div> -->
       <div class="main_section">
         <div class="lhs">
           <h2 class="title">Sell your car, new or old</h2>
@@ -24,19 +15,16 @@
         <div class="rhs">
           <div v-if="!carAdded" class="rhs_inner">
             <SellCarOne
-              v-if="formOne"
-              :save-form="saveFormOne"
+              v-if="activeForm === 'step 1'"
               :close-list="closeList"
-              @next="toFormTwo()"
+              @next="setActiveForm('step 2')"
             />
             <SellCarTwo
-              v-if="formTwo"
-              :save-form="saveFormTwo"
-              @next="toFormThree()"
+              v-if="activeForm === 'step 2'"
+              @next="setActiveForm('step 3')"
             />
             <SellCarThree
-              v-if="formThree"
-              :save-form="saveFormThree"
+              v-if="activeForm === 'step 3'"
               @next="submit"
             />
             <div class="bottom_section">
@@ -69,13 +57,10 @@
 
 <script setup>
 import axios from "axios";
-const config = useRuntimeConfig();
-const baseUrl = config.public.BASE_URL;
 const dataStore = useDataStore();
+const route = useRoute();
 
-const saveFormOne = ref(false);
-const saveFormTwo = ref(false);
-const saveFormThree = ref(false);
+const activeForm = ref(route.query?.progress || 'step 1')
 const formOne = ref(true);
 const formTwo = ref(false);
 const formThree = ref(false);
@@ -90,53 +75,20 @@ const dateTime = ref({
 });
 const closeList = ref(false);
 
-const submitForm = () => {
-  if (formOne.value) {
-    saveFormOne.value = true;
-    saveFormTwo.value = false;
-    saveFormThree.value = false;
-  } else if (formTwo.value) {
-    saveFormTwo.value = true;
-    saveFormOne.value = false;
-    saveFormThree.value = false;
-  } else {
-    saveFormThree.value = true;
-    saveFormTwo.value = false;
-    saveFormOne.value = false;
-  }
+const updateRoute = (val) => {
+  navigateTo({
+    path: '/sell-car',
+    query: {
+      progress: val,
+    },
+  });
 };
-const toFormTwo = () => {
-  formOne.value = false;
-  formTwo.value = true;
-  formOneCompleted.value = true;
-};
-const toFormThree = () => {
-  formOne.value = false;
-  formTwo.value = false;
-  formThree.value = true;
-  formTwoCompleted.value = true;
-};
-const prevForm = () => {
-  saveFormTwo.value = false;
-  saveFormOne.value = false;
-  saveFormThree.value = false;
-  if (formTwo.value) {
-    formTwoCompleted.value = false;
-    formOneCompleted.value = false;
-    formTwo.value = false;
-    formThree.value = false;
-    formOne.value = true;
-    console.log(formOne.value);
-  } else if (formThree.value) {
-    formThreeCompleted.value = false;
-    formTwoCompleted.value = false;
-    formThree.value = false;
-    formTwo.value = true;
-    formOne.value = false;
-  } else {
-    console.log(formData.value);
-  }
-};
+
+const setActiveForm = (val) => {
+  console.log(val);
+  activeForm.value = val
+  updateRoute(val)
+}
 
 const submit = (data) => {
   loading.value = true;
@@ -169,9 +121,8 @@ const submit = (data) => {
   formdata.append("proposedInspectionDate", convertedDate);
   formdata.append("proposedInspectionTime", form.inspectionTime);
   console.log(formdata);
-  const path = "api/sell";
   axios
-    .post(`${baseUrl}${path}`, formdata)
+    .post("api/sell", formdata)
     .then((response) => {
       console.log(response);
       carAdded = true;
@@ -199,7 +150,7 @@ const submit = (data) => {
     .catch((_err) => {
       saveFormThree.value = false;
       const { message } = _err?.response?.data?.error || _err?.message;
-      apiErrorMessage.value = message;
+      // apiErrorMessage.value = message;
     })
     .finally(() => {
       loading.value = false;
