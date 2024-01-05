@@ -14,7 +14,7 @@
           }"
         ></div>
         <div class="card_type">
-          <p>{{ functions.capitalizeFirstLetter(card.condition) }}</p>
+          <p>{{ functions.capitalizeFirstLetter(card.condition === 'foreignUsed' ? 'Foreign Used' : card.condition) }}</p>
         </div>
       </div>
       <p class="card_title">

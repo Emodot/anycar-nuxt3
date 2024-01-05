@@ -58,8 +58,8 @@ const getCarData = async () => {
   const path2 = "api/sell";
   console.log(path1);
   Promise.all([
-    axios.get(`${baseUrl}${path1}`),
-    axios.get(`${baseUrl}${path2}`),
+    axios.get(path1),
+    axios.get(path2),
   ])
     .then((response) => {
       console.log(response);

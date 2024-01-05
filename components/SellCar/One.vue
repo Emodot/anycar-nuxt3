@@ -160,9 +160,8 @@ const selectMake = (data) => {
 };
 const getMake = () => {
   makeLoading.value = true;
-  const path = "api/make";
   axios
-    .get(`${baseUrl}${path}`)
+    .get("api/make")
     .then((response) => {
       console.log(response);
       carMakes.value = response.docs.data;
@@ -179,7 +178,7 @@ const getModels = (year) => {
   modelLoading.value = true;
   const path = `api/model?year=${formOne.formattedYear.value}&make_id=${formOne.makeId.value}`;
   axios
-    .get(`${baseUrl}${path}`)
+    .get(path)
     .then((response) => {
       console.log(response);
       carModels.value = response.data.data;
