@@ -201,13 +201,15 @@ const formData = dataStore.sellCarForm;
 console.log(formData);
 formOne.value.make = formData.make;
 formOne.value.makeId = formData.makeId;
-formOne.value.model = formData.model;
 formOne.value.year_manufacture = formData.year_manufacture;
+if (formOne.value.year_manufacture !== 0) {
+  getModels();
+}
+formOne.value.model = formData.model;
 formOne.value.condition = formData.condition;
 formOne.value.transmission_type = formData.transmission_type;
 
 getMake();
-// getModels();
 </script>
 
 <style scoped>

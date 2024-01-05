@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="rhs">
-          <div v-if="!carAdded" class="rhs_inner">
+          <div class="rhs_inner">
             <SellCarOne
               v-if="activeForm === 'step 1'"
               :close-list="closeList"
@@ -25,9 +25,11 @@
             />
             <SellCarThree
               v-if="activeForm === 'step 3'"
+              :loading="loading"
               @next="submit"
             />
-            <div class="bottom_section">
+            <SellCarDetailsAdded v-if="activeForm === 'success'" :date-time="dateTime" />
+            <!-- <div class="bottom_section">
               <div class="bottom_btns">
                 <button
                   :class="`global_btn_2 ${formOne ? 'disabled_btn' : ''}`"
@@ -46,9 +48,8 @@
                   <Loader class="come-down" />
                 </button>
               </div>
-            </div>
+            </div> -->
           </div>
-          <SellCarDetailsAdded v-else :date-time="dateTime" />
         </div>
       </div>
     </div>
@@ -61,12 +62,12 @@ const dataStore = useDataStore();
 const route = useRoute();
 
 const activeForm = ref(route.query?.progress || 'step 1')
-const formOne = ref(true);
-const formTwo = ref(false);
-const formThree = ref(false);
-const formOneCompleted = ref(false);
-const formTwoCompleted = ref(false);
-const formThreeCompleted = ref(false);
+// const formOne = ref(true);
+// const formTwo = ref(false);
+// const formThree = ref(false);
+// const formOneCompleted = ref(false);
+// const formTwoCompleted = ref(false);
+// const formThreeCompleted = ref(false);
 const carAdded = ref(false);
 const loading = ref(false);
 const dateTime = ref({
@@ -92,19 +93,19 @@ const setActiveForm = (val) => {
 
 const submit = (data) => {
   loading.value = true;
-  const form = sellCarData.sellCarForm;
+  const form = dataStore.sellCarForm;
   console.log(form);
   const carImages = data;
   console.log(carImages);
-  const formattedYear = new Date(form.year_manufacture).getFullYear();
+  // const formattedYear = new Date(form.year_manufacture).getFullYear();
   const convertedDate = new Date(form.inspectionDate);
-  dateTime.date.value = form.inspectionDate;
-  dateTime.time.value = form.inspectionTime;
+  dateTime.value.date = form.inspectionDate;
+  dateTime.value.time = form.inspectionTime;
   console.log(dateTime);
   const formdata = new FormData();
   formdata.append("make", form.make);
   formdata.append("model", form.model);
-  formdata.append("yearOfManufacture", formattedYear);
+  formdata.append("yearOfManufacture", form.year_manufacture);
   formdata.append("condition", form.condition);
   formdata.append("transmissionType", form.transmission_type);
   formdata.append("interiorColor", form.interior_color);
@@ -125,13 +126,11 @@ const submit = (data) => {
     .post("api/sell", formdata)
     .then((response) => {
       console.log(response);
-      carAdded = true;
       const clearedForm = {
         makeId: 0,
         make: "",
         model: "",
         year_manufacture: 0,
-        formattedYear: 0,
         condition: "",
         transmission_type: "",
         interior_color: "",
@@ -145,10 +144,10 @@ const submit = (data) => {
         inspectionDate: "",
         inspectionTime: "",
       };
-      // sellCarData.commit("setSellCarForm", clearedForm);
+      dataStore.setSellCarForm(clearedForm);
+      setActiveForm('success')
     })
     .catch((_err) => {
-      saveFormThree.value = false;
       const { message } = _err?.response?.data?.error || _err?.message;
       // apiErrorMessage.value = message;
     })

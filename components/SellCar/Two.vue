@@ -23,7 +23,7 @@
       </div>
       <div class="input_ctn">
         <p class="label">VIN</p>
-        <input v-model="formTwo.vin" class="form_input" type="text" />
+        <input v-model="formTwo.vin" class="form_input" type="text" @input="formatVin"/>
       </div>
       <div class="input_ctn">
         <p class="label">Engine Type</p>
@@ -80,10 +80,13 @@ formTwo.value.engine_type = formData.engine_type;
 formTwo.value.asking_price = formData.asking_price;
 
 const saveForm = () => {
-  console.log(formTwo.value);
   dataStore.setSellCarForm(formTwo.value);
   emit("next");
 };
+
+const formatVin = (data) => {
+  formTwo.value.vin = data.target.value.toUpperCase()
+}
 </script>
 
 <style scoped>
