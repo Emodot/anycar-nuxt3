@@ -1,7 +1,7 @@
 <template>
   <div class="main_ctn" @click="closeList = true">
     <div class="inner">
-      <div class="top_section">
+      <!-- <div class="top_section">
         <div>
           <h2 class="title">Sell your car, new or old</h2>
           <p class="sub_title">
@@ -9,9 +9,14 @@
             visible to potential buyers
           </p>
         </div>
-      </div>
+      </div> -->
       <div class="main_section">
         <div class="lhs">
+          <h2 class="title">Sell your car, new or old</h2>
+          <p class="sub_title">
+            Kindly upload the details of your car, once approved, it will be
+            visible to potential buyers
+          </p>
           <div class="lhs_img">
             <img src="~assets/images/sell_car_img.jpg" alt="" />
           </div>
@@ -35,35 +40,6 @@
               @next="submit"
             />
             <div class="bottom_section">
-              <div class="progress_bar">
-                <div
-                  :class="`progress_line ${
-                    formOneCompleted
-                      ? 'completed_line'
-                      : formOne
-                      ? 'active_line completed_line'
-                      : ''
-                  }`"
-                />
-                <div
-                  :class="`progress_line ${
-                    formTwoCompleted
-                      ? 'completed_line'
-                      : formTwo
-                      ? 'active_line completed_line'
-                      : ''
-                  }`"
-                />
-                <div
-                  :class="`progress_line ${
-                    formThreeCompleted
-                      ? 'completed_line'
-                      : formThree
-                      ? 'active_line completed_line'
-                      : ''
-                  }`"
-                />
-              </div>
               <div class="bottom_btns">
                 <button
                   :class="`global_btn_2 ${formOne ? 'disabled_btn' : ''}`"
@@ -95,13 +71,12 @@
 import axios from "axios";
 const config = useRuntimeConfig();
 const baseUrl = config.public.BASE_URL;
-const sellCarData = useSellCarStore();
-// const { sellCarData } = storeToRefs(useSellCarStore());
+const dataStore = useDataStore();
 
 const saveFormOne = ref(false);
 const saveFormTwo = ref(false);
 const saveFormThree = ref(false);
-const formOne = ref(false);
+const formOne = ref(true);
 const formTwo = ref(false);
 const formThree = ref(false);
 const formOneCompleted = ref(false);
@@ -234,6 +209,7 @@ const submit = (data) => {
 
 <style scoped>
 .main_ctn {
+  background-color: #F2F4F7;
   padding: 120px 0;
 }
 
@@ -260,10 +236,10 @@ const submit = (data) => {
 
 .lhs {
   flex-basis: 45%;
-  margin-top: 3rem;
 }
 
 .lhs_img {
+  margin-top: 3rem;
   width: 100%;
 }
 
@@ -273,7 +249,10 @@ const submit = (data) => {
 }
 
 .rhs {
-  flex-basis: 30%;
+  flex-basis: 45%;
+  background-color: #FFF;
+  padding: 4rem;
+  border-radius: 10px;
 }
 
 .rhs_inner {

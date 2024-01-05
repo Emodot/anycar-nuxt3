@@ -1,5 +1,9 @@
 <template>
   <div class="form_container">
+    <div class="top_section">
+      <p class="form_title">Fill in your Car Details</p>
+      <p class="form_step">Step 1 of 4</p>
+    </div>
     <div class="form_inner">
       <div class="input_ctn">
         <p class="label">
@@ -48,6 +52,9 @@
         <money v-model="formTwo.asking_price" v-bind="money" />
         <!-- <input v-model="formTwo.asking_price" class="form_input" type="number"> -->
       </div>
+      <button class="global_btn" @click="saveForm()">
+        Next
+      </button>
     </div>
   </div>
 </template>

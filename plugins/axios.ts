@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useUserStore } from "@/store/index";
+import { useDataStore } from "~/store/index";
 
 export default defineNuxtPlugin((NuxtApp) => {
   axios.defaults.baseURL = "https://cara-4oc8.onrender.com/";
   // axios.defaults.withCredentials = true;
-  const dataStore = useUserStore();
+  const dataStore = useDataStore();
   axios.interceptors.request.use((config) => {
     config.headers["Authorization"] = `Bearer ${dataStore.token}`;
     config.headers["x-api-token"] = `${dataStore.apiToken}`;
