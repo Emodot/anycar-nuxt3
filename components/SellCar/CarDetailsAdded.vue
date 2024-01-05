@@ -2,26 +2,36 @@
   <div class="ctn">
     <div class="reveals">
       <div class="top_section">
-        <p class="modal_title">
-          Congratulations!
-        </p>
-        <span class="material-icons-outlined close" @click="$emit('close-modal')">
+        <p class="modal_title">Congratulations!</p>
+        <span
+          class="material-icons-outlined close"
+          @click="$emit('close-modal')"
+        >
           close
         </span>
       </div>
       <div class="modal_content">
         <div class="modal_icon">
-          <img src="~assets/icons/success.gif" alt="">
+          <img src="~assets/icons/success.gif" alt="" />
         </div>
+        <!-- <p class="modal_text">
+          Your inspection has been scheduled successfully for
+          {{ formatDate(dateTime.date) }} for {{ formatTime(dateTime.time) }},
+          more details has been sent to your email someone from our support team
+          will contact you
+        </p> -->
         <p class="modal_text">
-          Your inspection has been scheduled successfully for {{ formatDate(dateTime.date) }} for {{ formatTime(dateTime.time) }}, more details has been sent to your email someone from our support team will contact you
+          You have successfully booked an appointment. Our representative will reach out to you within 24 hours
+        </p>
+        <p class="modal_text">
+          Feel Free to give us a call on this number +234 700 012 3456
         </p>
         <div class="bottom_btn">
           <!-- <button class="global_btn compare_btn">
             My Dashboard
           </button> -->
           <button class="global_btn" @click="$router.push('/')">
-            Ok, Go Home
+            Return to Home
           </button>
         </div>
       </div>
@@ -29,67 +39,44 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    dateTime: {
-      type: Object,
-      default: () => {}
-    }
+<script setup>
+const props = defineProps({
+  dateTime: {
+    type: Object,
+    default: () => {},
   },
-  // watch: {
-  //   dateTime: {
-  //     immediate: true,
-  //     handler (val) {
-  //       console.log(val)
-  //       this.formatTime()
-  //     }
-  //   }
-  // },
-  methods: {
-    formatDate (date) {
-      const newDate = new Date(date).toLocaleDateString('en-us',
-        {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric'
-        }
-      )
-      return newDate
-    },
-    formatTime (date) {
-      // let hours = date.getHours()
-      // let minutes = date.getMinutes()
-      // const ampm = hours >= 12 ? 'pm' : 'am'
-      // hours = hours % 12
-      // hours = hours || 12 // the hour '0' should be '12'
-      // minutes = minutes < 10 ? '0' + minutes : minutes
-      // const strTime = hours + ':' + minutes + ' ' + ampm
-      // return strTime
+});
 
-      const [hours, minutes] = date.split(':')
+const formatDate = (date) => {
+  const newDate = new Date(date).toLocaleDateString("en-us", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  return newDate;
+};
+const formatTime = (date) => {
+  const [hours, minutes] = date.split(":");
 
-      const hoursInt = parseInt(hours, 10)
+  const hoursInt = parseInt(hours, 10);
 
-      const period = hoursInt >= 12 ? 'PM' : 'AM'
+  const period = hoursInt >= 12 ? "PM" : "AM";
 
-      const hours12 = hoursInt % 12 || 12
+  const hours12 = hoursInt % 12 || 12;
 
-      // Format the time as AM/PM
-      const ampmTime = `${hours12}:${minutes} ${period}`
-      return ampmTime
-    }
-  }
-}
+  // Format the time as AM/PM
+  const ampmTime = `${hours12}:${minutes} ${period}`;
+  return ampmTime;
+};
 </script>
 
 <style scoped>
-
 .modal_icon {
   width: 50%;
   margin: auto;
   margin-top: -40px;
+  margin-bottom: -30px;
 }
 
 .modal_icon img {
@@ -100,7 +87,7 @@ export default {
   width: 80%;
   margin: auto;
   text-align: center;
-  margin-top: -30px;
+  margin-bottom: 20px;
 }
 
 .top_section {
@@ -120,7 +107,7 @@ export default {
 .close {
   position: absolute;
   cursor: pointer;
-  color: #C5C5C5;
+  color: #c5c5c5;
   right: 2rem;
   top: 2rem;
 }
@@ -178,7 +165,6 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
-
   .modal {
     width: 90%;
   }
@@ -186,6 +172,5 @@ export default {
   .modal_content {
     padding: 20px 10px;
   }
-
 }
 </style>
