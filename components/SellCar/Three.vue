@@ -1,5 +1,9 @@
 <template>
   <div class="form_container">
+    <div class="top_section">
+      <p class="form_title">Fill in your Car Details</p>
+      <p class="form_step">Step 1 of 4</p>
+    </div>
     <div class="form_inner">
       <div class="input_ctn">
         <p class="label">
@@ -76,6 +80,9 @@
           </div>
         </div>
       </div>
+      <button class="global_btn" @click="saveForm()">
+        Next
+      </button>
     </div>
   </div>
 </template>
@@ -202,5 +209,24 @@ export default {
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+.global_btn {
+  margin-top: 20px;
+  width: 100%;
+}
+.top_section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.form_title {
+  font-size: 20px;
+  font-weight: 700;
+}
+.form_step {
+  font-size: 14px;
 }
 </style>
